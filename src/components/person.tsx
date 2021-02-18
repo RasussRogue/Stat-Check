@@ -1,6 +1,6 @@
 import * as React from 'react';
 // @ts-ignore
-import {Button, List, ListItem, ListItemText} from "@material-ui/core";
+import {Button, Grid, List, ListItem, ListItemText} from "@material-ui/core";
 import {FC, useEffect, useState} from "react";
 
 interface Person {
@@ -66,14 +66,18 @@ export const Persons = () => {
 
 
     const personsss = persons.map((person: Person) => <Person person={person}/>);
-        return (
-            <div>
+    return (
+        <Grid container direction="column" alignItems="center">
+            <Grid item xs>
                 <List component="nav" aria-label="secondary mailbox folders">
                     {personsss}
                 </List>
+            </Grid>
+            <Grid item xs>
                 <Button variant="contained" onClick={(e: { preventDefault: () => void; }) => handleClick(e)}>Générer
                     un être humain</Button>
-            </div>
-        );
+            </Grid>
+        </Grid>
+    );
 
 }

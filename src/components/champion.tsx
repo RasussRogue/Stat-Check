@@ -1,6 +1,6 @@
 import * as React from 'react';
 // @ts-ignore
-import {Button, List, ListItem, ListItemText} from "@material-ui/core";
+import {Button, Container, Grid, List, ListItem, ListItemText} from "@material-ui/core";
 import {FC, useEffect, useState} from "react";
 
 interface Data {
@@ -60,12 +60,16 @@ export const Champions = () => {
 
     const championsDisplayed = loadedChampions.map(champion => <Champion champion={champion}/>);
     return (
-        <div>
-            <List component="nav" aria-label="secondary mailbox folders">
-                {championsDisplayed}
-            </List>
-            <Button variant="contained" onClick={(e: { preventDefault: () => void; }) => handleClick(e)}>Ajouter
-                des champions</Button>
-        </div>
+        <Grid  container direction="column" alignItems="center">
+            <Grid item xs>
+                <List component="nav" aria-label="secondary mailbox folders">
+                    {championsDisplayed}
+                </List>
+            </Grid>
+            <Grid item xs>
+                <Button variant="contained" onClick={(e: { preventDefault: () => void; }) => handleClick(e)}>Ajouter
+                    des champions</Button>
+            </Grid>
+        </Grid>
     );
 }
