@@ -1,6 +1,15 @@
 import * as React from 'react';
-// @ts-ignore
-import {Button, Container, Grid, List, ListItem, ListItemText} from "@material-ui/core";
+
+import {
+    Avatar,
+    Button,
+    Grid,
+    List,
+    ListItem,
+    ListItemAvatar,
+    ListItemText
+    // @ts-ignore
+} from "@material-ui/core";
 import {FC, useEffect, useState} from "react";
 
 interface Data {
@@ -21,8 +30,11 @@ interface ChampionProps {
 const Champion: FC<ChampionProps> = ({champion}) => {
     return (
         <div>
-            <ListItem button>
-                <ListItemText primary={champion.name + ', ' + champion.title}/>
+            <ListItem key={champion.name}>
+                <ListItemAvatar>
+                    <Avatar alt='Aatrox' src="http://ddragon.leagueoflegends.com/cdn/11.6.1/img/champion/Aatrox.png"></Avatar>
+                </ListItemAvatar>
+                <ListItemText primary='Aatrox' secondary='Fighter/Tank'/>
             </ListItem>
         </div>
     )
