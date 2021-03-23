@@ -10,9 +10,9 @@ import Icon from '@mdi/react'
 import { makeStyles } from '@material-ui/core/styles';
 import { Champion, Data } from 'model';
 
-interface ChampionProps {
+type ChampionProps = Readonly<{
     champion:Champion
-}
+}>
 
 const Champion: FC<ChampionProps> = ({champion}) => {
     const useStyles = makeStyles({
