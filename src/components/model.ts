@@ -8,6 +8,3 @@ export interface Champion {
     blurb:string
 }
 
-export interface ChampionProps {
-    champion:Champion
-}

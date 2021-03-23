@@ -8,8 +8,11 @@ import {mdiSword, mdiFire, mdiPlusOutline, mdiFlash, mdiShield, mdiAxe, mdiCircl
 import Icon from '@mdi/react'
 // @ts-ignore
 import { makeStyles } from '@material-ui/core/styles';
-import { ChampionProps, Champion, Data } from 'model';
+import { Champion, Data } from 'model';
 
+interface ChampionProps {
+    champion:Champion
+}
 
 const Champion: FC<ChampionProps> = ({champion}) => {
     const useStyles = makeStyles({
