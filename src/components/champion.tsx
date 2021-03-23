@@ -6,6 +6,8 @@ import {FC, useEffect, useState} from "react";
 import {mdiSword, mdiFire, mdiPlusOutline, mdiFlash, mdiShield, mdiAxe, mdiCircleSlice8, mdiRunFast} from '@mdi/js';
 // @ts-ignore
 import Icon from '@mdi/react'
+// @ts-ignore
+import { makeStyles } from '@material-ui/core/styles';
 
 interface Data {
     data:any
@@ -23,38 +25,50 @@ interface ChampionProps {
 
 
 const Champion: FC<ChampionProps> = ({champion}) => {
+    const useStyles = makeStyles({
+        grid: {
+            fontFamily: 'Roboto'
+        },
+        icon: {
+            verticalAlign:'bottom',
+            height:25,
+            width:25
+        }
+    });
+
+    const classes = useStyles();
     return (
         <div>
             <ListItem key={champion.name}>
                 <ListItemAvatar>
-                    <Avatar alt='Aatrox' src="http://ddragon.leagueoflegends.com/cdn/11.6.1/img/champion/Aatrox.png"/>
+                    <Avatar alt='Aatrox' variant='square' src="http://ddragon.leagueoflegends.com/cdn/11.6.1/img/champion/Aatrox.png"/>
                 </ListItemAvatar>
                 <ListItemText primary='Aatrox' secondary='Fighter/Tank'/>
             </ListItem>
-            <Grid style={{fontFamily: 'Roboto'}} container spacing={3}>
+            <Grid className={classes.grid} container spacing={3}>
                 <Grid item xs={6}>
-                    <Icon style={{verticalAlign:'bottom'}} path={mdiFire} size={1}/> 0
+                    <Icon className={classes.icon} path={mdiFire}/> 0
                 </Grid>
                 <Grid item xs={6}>
-                    <Icon style={{verticalAlign:'bottom'}} path={mdiSword} size={1}/> 0.651
+                    <Icon className={classes.icon} path={mdiSword}/> 0.651
                 </Grid>
                 <Grid item xs={6}>
-                    <Icon style={{verticalAlign:'bottom'}} path={mdiPlusOutline} size={1}/> 580
+                    <Icon className={classes.icon} path={mdiPlusOutline}/> 580
                 </Grid>
                 <Grid item xs={6}>
-                    <Icon style={{verticalAlign:'bottom'}} path={mdiFlash} size={1}/> 0
+                    <Icon className={classes.icon} path={mdiFlash}/> 0
                 </Grid>
                 <Grid item xs={6}>
-                    <Icon style={{verticalAlign:'bottom'}} path={mdiShield} size={1}/> 38
+                    <Icon className={classes.icon} path={mdiShield}/> 38
                 </Grid>
                 <Grid item xs={6}>
-                    <Icon style={{verticalAlign:'bottom'}} path={mdiAxe} size={1}/> 60
+                    <Icon className={classes.icon} path={mdiAxe}/> 60
                 </Grid>
                 <Grid item xs={6}>
-                    <Icon style={{verticalAlign:'bottom'}} path={mdiCircleSlice8} size={1}/> 32
+                    <Icon className={classes.icon} path={mdiCircleSlice8}/> 32
                 </Grid>
                 <Grid item xs={6}>
-                    <Icon style={{verticalAlign:'bottom'}} path={mdiRunFast} size={1}/> 580
+                    <Icon className={classes.icon} path={mdiRunFast}/> 580
                 </Grid>
             </Grid>
         </div>
