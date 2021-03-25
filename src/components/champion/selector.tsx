@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Champion, Data } from "../model";
-import { ChampionView } from "./champion";
+import { ChampionView } from "./championview";
 
 
 export const Selector = () => {
