@@ -7,4 +7,3 @@ export interface Champion {
     title:string,
     blurb:string
 }
-

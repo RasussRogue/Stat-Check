@@ -1,10 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-
-
 import { Champions } from "./components/champion";
-// @ts-ignore
-import {Grid} from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
 
 class Hello extends React.Component {

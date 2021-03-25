@@ -1,14 +1,11 @@
 import * as React from 'react';
-// @ts-ignore
-import { Avatar, Button, Grid, List, ListItem, ListItemAvatar, ListItemText} from "@material-ui/core";
-import {FC, useEffect, useState} from "react";
-// @ts-ignore
-import {mdiSword, mdiFire, mdiPlusOutline, mdiFlash, mdiShield, mdiAxe, mdiCircleSlice8, mdiRunFast} from '@mdi/js';
-// @ts-ignore
-import Icon from '@mdi/react'
-// @ts-ignore
+import { FC, useEffect, useState } from "react";
+import { Avatar, Button, Grid, List, ListItem, ListItemAvatar, ListItemText } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
-import { Champion, Data } from 'model';
+import { mdiSword, mdiFire, mdiPlusOutline, mdiFlash, mdiShield, mdiAxe, mdiCircleSlice8, mdiRunFast } from '@mdi/js';
+import { Icon }  from '@mdi/react'
+import { Data, Champion } from "./model";
+
 
 type ChampionProps = Readonly<{
     champion:Champion
