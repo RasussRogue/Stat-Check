@@ -1,17 +1,17 @@
 import * as React from 'react';
-import { useEffect, useState } from "react";
+import { FC } from "react";
 import { Avatar, Grid, List, ListItem, ListItemAvatar, ListItemText } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import { mdiSword, mdiFire, mdiPlusOutline, mdiFlash, mdiShield, mdiAxe, mdiCircleSlice8, mdiRunFast } from '@mdi/js';
 import { Icon }  from '@mdi/react'
-import { Data, Champion } from "./model";
+import { Champion } from "../model";
 
 type ChampionProps = Readonly<{
     champion:Champion
 }>
 
-export const ChampionDisplayed = () => {
-    const [champion, setChampion] = useState<ChampionProps>();
+export const ChampionView: FC<ChampionProps> = ({ champion }) => {
+
     const useStyles = makeStyles({
         grid: {
             fontFamily: 'Roboto'
@@ -22,22 +22,6 @@ export const ChampionDisplayed = () => {
             width:25
         }
     });
-
-    useEffect(() => {
-        loadChampion();
-    }, [])
-
-    function loadChampion() {
-        fetch(`http://ddragon.leagueoflegends.com/cdn/11.6.1/data/en_US/champion/Aatrox.json`, {
-            method: 'GET',
-        }).then(response => response.json())
-            .then(response => {
-                const payload  = response as Data
-                const champs = Object.values(payload.data) as Champion[]
-                const champion = champs[0]
-                setChampion({ champion } as ChampionProps)
-            })
-    }
 
     const classes = useStyles();
     return (
@@ -80,25 +64,3 @@ export const ChampionDisplayed = () => {
     )
 }
 
-/*
-    function handleClick(e: { preventDefault: () => void; }) {
-    e.preventDefault()
-    const notLoaded = champions.slice();
-    const hasLoaded = loadedChampions.slice().concat(champions[0])
-    setChampions(notLoaded.slice(1, notLoaded.length))
-    setLoadedChampions(hasLoaded)
-
-
-    const championsDisplayed = loadedChampions.map(champion => <Champion champion={champion}/>);
-    return (
-        <Grid container direction="column" alignItems="center">
-            <Grid item xs>
-                <Champion />
-            </Grid>
-            <Grid item xs>
-                <Button variant="contained" onClick={(e: { preventDefault: () => void; }) => handleClick(e)}>Ajouter
-                    des champions</Button>
-            </Grid>
-        </Grid>
-    );
-}*/
