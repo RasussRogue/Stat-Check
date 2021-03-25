@@ -4,7 +4,7 @@ import { Avatar, Grid, List, ListItem, ListItemAvatar, ListItemText } from "@mat
 import { makeStyles } from '@material-ui/core/styles';
 import { mdiSword, mdiFire, mdiPlusOutline, mdiFlash, mdiShield, mdiAxe, mdiCircleSlice8, mdiRunFast } from '@mdi/js';
 import { Icon }  from '@mdi/react'
-import { Champion } from "../model";
+import { Champion } from "../Model";
 
 type ChampionProps = Readonly<{
     champion:Champion
