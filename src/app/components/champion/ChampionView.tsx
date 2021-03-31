@@ -4,14 +4,13 @@ import { Avatar, Grid, List, ListItem, ListItemAvatar, ListItemText } from "@mat
 import { makeStyles } from '@material-ui/core/styles';
 import { mdiSword, mdiFire, mdiPlusOutline, mdiFlash, mdiShield, mdiAxe, mdiCircleSlice8, mdiRunFast } from '@mdi/js';
 import { Icon }  from '@mdi/react'
-import { Champion } from "../Model";
+import { Champion } from "../model/model";
 
 type ChampionProps = Readonly<{
     champion:Champion
 }>
 
 export const ChampionView: FC<ChampionProps> = ({ champion }) => {
-
     const useStyles = makeStyles({
         grid: {
             fontFamily: 'Roboto'

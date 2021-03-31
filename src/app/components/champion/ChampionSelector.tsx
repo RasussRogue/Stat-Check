@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Champion, Data } from "../Model";
+import { Champion, Data } from "../model/model";
 import { ChampionView } from "./ChampionView";
 
 
@@ -19,7 +19,7 @@ export const ChampionSelector = () => {
                 const payload  = response as Data
                 const champs = Object.values(payload.data) as Champion[]
                 const champion = champs[0]
-                setChampion(champion  as Champion)
+                setChampion(champion as Champion)
             })
     }
 
