@@ -6,6 +6,7 @@ module.exports = {
     devtool: 'inline-source-map',
 
     devServer: {
+        historyApiFallback: true,
         contentBase: path.join(__dirname, ''),
         compress: true,
         port: 3000,
@@ -17,6 +18,7 @@ module.exports = {
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
+        publicPath: '/'
     },
 
     module: {
