@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Champion, Data } from "../model/model";
+import { Champion, Data } from "../model/models";
 import { ChampionView } from "./ChampionView";
 
 
