@@ -1,10 +1,11 @@
 import * as React from 'react';
 import {FC} from "react";
-import {Avatar, Grid, List, ListItem, ListItemAvatar, ListItemText} from "@material-ui/core";
+import {Avatar, Grid, List, ListItem, ListItemAvatar, ListItemText, Slider} from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
 import {mdiSword, mdiFire, mdiPlusOutline, mdiFlash, mdiShield, mdiAxe, mdiCircleSlice8, mdiRunFast} from '@mdi/js';
 import {Icon} from '@mdi/react'
 import {Champion} from "../model/models";
+
 
 type ChampionProps = Readonly<{
     champion: Champion
@@ -18,7 +19,15 @@ export const ChampionView: FC<ChampionProps> = ({champion}) => {
         icon: {
             verticalAlign: 'bottom',
             height: 25,
-            width: 25
+            width: 25,
+            opacity: 0.80
+        },
+        slider: {
+            color:'black',
+            paddingTop:'14%'
+        },
+        statsBox: {
+            border:'solid'
         }
     });
 
@@ -34,7 +43,19 @@ export const ChampionView: FC<ChampionProps> = ({champion}) => {
                         </ListItemAvatar>
                         <ListItemText primary='Aatrox' secondary='Fighter/Tank'/>
                     </ListItem>
-                    <ListItem key='Stats'>
+                    <ListItem key='LevelSlider'>
+                        <Slider
+                            className={classes.slider}
+                            defaultValue={1}
+                            aria-labelledby="discrete-slider"
+                            valueLabelDisplay="on"
+                            step={1}
+                            marks
+                            min={1}
+                            max={18}
+                        />
+                    </ListItem>
+                    <ListItem key='Stats' className={classes.statsBox}>
                         <Grid className={classes.grid} container spacing={3}>
                             <Grid item xs={6}>
                                 <Icon className={classes.icon} path={mdiFire}/> 0
@@ -67,4 +88,3 @@ export const ChampionView: FC<ChampionProps> = ({champion}) => {
         </Grid>
     )
 }
-
