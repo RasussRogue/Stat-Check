@@ -30,6 +30,11 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
         },
         statsBox: {
             border: 'solid'
+        },
+        avatarSearch: {
+            height: '22%',
+            width: '22%',
+            marginRight:'5%'
         }
     });
 
@@ -40,12 +45,18 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
             <Autocomplete
                 id="combo-box-demo"
                 options={championsList}
-                getOptionLabel={(option) => option.name}
+                getOptionLabel={(option) =>  option.name}
                 style={{width: '60%'}}
                 onChange={callback}
+                renderOption={(option) => (
+                    <React.Fragment>
+                        <Avatar className={classes.avatarSearch} src={"http://ddragon.leagueoflegends.com/cdn/11.6.1/img/champion/"+option.name+".png"}/>
+                        {option.name}
+                    </React.Fragment>
+                )}
                 getOptionSelected={(option, value) => value.name === option.name}
                 renderInput={
-                    (params) => <TextField {...params}  label="Champion" variant="outlined"/>
+                    (params) => <TextField {...params} label="Champion" variant="outlined"/>
                 }
             />
             <ListItem key='IDCard'>
