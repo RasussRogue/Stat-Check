@@ -7,12 +7,13 @@ import {Icon} from '@mdi/react'
 import {Champion} from "../model/models";
 import {Autocomplete} from "@material-ui/lab";
 
-
 type ChampionProps = Readonly<{
     champion: Champion
+    championsList: Champion[]
+    callback: any
 }>
 
-export const ChampionView: FC<ChampionProps> = ({champion}) => {
+export const ChampionView: FC<ChampionProps> = ({champion, callback, championsList}) => {
     const useStyles = makeStyles({
         grid: {
             fontFamily: 'Roboto'
@@ -33,29 +34,26 @@ export const ChampionView: FC<ChampionProps> = ({champion}) => {
     });
 
     const classes = useStyles();
-    const championsList = [
-        'Aatrox',
-        'Ahri',
-        'Gangplank',
-        'Irelia'
-    ]
 
     return (
         <List component="nav" aria-label="secondary mailbox folders" style={{width: '17%'}}>
             <Autocomplete
                 id="combo-box-demo"
                 options={championsList}
+                getOptionLabel={(option) => option.name}
                 style={{width: '60%'}}
+                onChange={callback}
+                getOptionSelected={(option, value) => value.name === option.name}
                 renderInput={
-                    (params) => <TextField {...params} label="Champion" variant="outlined"/>
+                    (params) => <TextField {...params}  label="Champion" variant="outlined"/>
                 }
             />
             <ListItem key='IDCard'>
                 <ListItemAvatar>
-                    <Avatar alt='Aatrox' variant='square'
-                            src="http://ddragon.leagueoflegends.com/cdn/11.6.1/img/champion/Aatrox.png"/>
+                    <Avatar alt={champion.name} variant='square'
+                            src={"http://ddragon.leagueoflegends.com/cdn/11.6.1/img/champion/"+champion.name+".png"}/>
                 </ListItemAvatar>
-                <ListItemText primary='Aatrox' secondary='Fighter/Tank'/>
+                <ListItemText primary={champion.name} secondary={champion.title}/>
             </ListItem>
             <ListItem key='LevelSlider'>
                 <Slider
