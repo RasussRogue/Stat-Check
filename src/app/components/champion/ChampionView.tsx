@@ -16,7 +16,7 @@ type ChampionProps = Readonly<{
 export const ChampionView: FC<ChampionProps> = ({champion, callback, championsList}) => {
     const useStyles = makeStyles({
         grid: {
-            fontFamily: 'Roboto'
+            fontFamily: 'Roboto',
         },
         icon: {
             verticalAlign: 'bottom',
@@ -36,7 +36,7 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
     const classes = useStyles();
 
     return (
-        <List component="nav" aria-label="secondary mailbox folders" style={{width: '17%'}}>
+        <List component="nav" aria-label="secondary mailbox folders" style={{width: '15%'}}>
             <Autocomplete
                 id="combo-box-demo"
                 options={championsList}
@@ -68,29 +68,29 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
                 />
             </ListItem>
             <ListItem key='Stats' className={classes.statsBox}>
-                <Grid className={classes.grid} container spacing={3}>
+                <Grid className={classes.grid} container spacing={2} alignItems={"baseline"} justify={"space-between"}>
                     <Grid item xs={6}>
                         <Icon className={classes.icon} path={mdiFire}/> 0
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={4}>
                         <Icon className={classes.icon} path={mdiSword}/> 0.651
                     </Grid>
                     <Grid item xs={6}>
                         <Icon className={classes.icon} path={mdiPlusOutline}/> 580
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={4}>
                         <Icon className={classes.icon} path={mdiFlash}/> 0
                     </Grid>
                     <Grid item xs={6}>
                         <Icon className={classes.icon} path={mdiShield}/> 38
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={4}>
                         <Icon className={classes.icon} path={mdiAxe}/> 60
                     </Grid>
                     <Grid item xs={6}>
                         <Icon className={classes.icon} path={mdiCircleSlice8}/> 32
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={4}>
                         <Icon className={classes.icon} path={mdiRunFast}/> 580
                     </Grid>
                 </Grid>
