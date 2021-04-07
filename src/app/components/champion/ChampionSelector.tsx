@@ -1,11 +1,18 @@
-import React from "react";
+import React, {useCallback} from "react";
 import { useEffect, useState } from "react";
 import { Champion, Data } from "../model/models";
 import { ChampionView } from "./ChampionView";
 
 
 export const ChampionSelector = () => {
-    const [champion, setChampion] = useState<Champion>();
+    const [champion, setChampion] = useState<Champion>({name: 'Aatrox', title: 'the Destroyer', blurb : 'Placeholder'},);
+
+    const championsList = [
+        {name: 'Aatrox', title: 'the Destroyer', blurb : 'Placeholder'},
+        {name: 'Gangplank', title: 'the Pirate', blurb : 'Placeholder'},
+        {name: 'Yorick', title: 'the Grave digger', blurb : 'Placeholder'},
+        {name: 'Ahri', title: 'the Cat', blurb : 'Placeholder'},
+    ]
 
     useEffect(() => {
         loadChampion();
@@ -23,7 +30,15 @@ export const ChampionSelector = () => {
             })
     }
 
+    const handleTextViewChange = useCallback(
+        (event, champion) => {
+            if (champion) setChampion(champion as Champion)
+        },
+        [],
+    );
+
+
     return (
-        <ChampionView champion={champion} />
+        <ChampionView champion={champion} callback={handleTextViewChange} championsList={championsList}/>
     )
 }
