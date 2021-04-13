@@ -16,7 +16,7 @@ type ChampionProps = Readonly<{
 export const ChampionView: FC<ChampionProps> = ({champion, callback, championsList}) => {
     const useStyles = makeStyles({
         grid: {
-            fontFamily: 'Roboto'
+            fontFamily: 'Rubik'
         },
         icon: {
             verticalAlign: 'bottom',
@@ -25,7 +25,6 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
             opacity: 0.80
         },
         slider: {
-            color: 'black',
             paddingTop: '14%'
         },
         statsBox: {
@@ -65,6 +64,7 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
                     marks
                     min={1}
                     max={18}
+                    color={"primary"}
                 />
             </ListItem>
             <ListItem key='Stats' className={classes.statsBox}>
