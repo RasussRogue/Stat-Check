@@ -24,23 +24,19 @@ type ChampionProps = Readonly<{
 }>
 
 export const ChampionView: FC<ChampionProps> = ({champion, callback, championsList}) => {
+    document.title = "Champions"
     const useStyles = makeStyles((theme: Theme) => ({
-        grid: {
-            fontFamily: 'Rubik',
-            color: theme.palette.common.white
-        },
         icon: {
             verticalAlign: 'bottom',
             height: 25,
             width: 25,
-            color: theme.palette.common.white
         },
         slider: {
             paddingTop: '14%'
         },
         statBox: {
             backgroundColor: theme.palette.primary.main
-        },
+        }
     }));
 
     const classes = useStyles();
@@ -82,7 +78,7 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
 
             <Box border={2} borderColor={"primary.main"} borderRadius={"borderRadius"} className={classes.statBox} boxShadow={3}>
                 <ListItem key='Stats'>
-                    <Grid className={classes.grid} container spacing={3}>
+                    <Grid container spacing={3}>
                         <Grid item xs={6}>
                             <Icon className={classes.icon} path={mdiFire} /> 0
                         </Grid>
