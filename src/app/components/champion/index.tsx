@@ -4,7 +4,7 @@ import { ChampionSelector } from "./ChampionSelector";
 export class ChampionPage extends React.Component {
     render() {
         return (
-            <ChampionSelector  />
+            <ChampionSelector />
         )
     }
 }
