@@ -16,10 +16,10 @@ export const theme = createMuiTheme({
             white: '#EAEBF0'
         },
         primary: {
-            main: '#3a22a5',
+            main: '#17172E',
         },
         secondary: {
-            main: '#e1bee7',
+            main: '#3273FA',
         },
     },
 });
