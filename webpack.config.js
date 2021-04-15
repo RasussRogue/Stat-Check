@@ -5,6 +5,8 @@ module.exports = {
     entry: './src/index.tsx',
     devtool: 'inline-source-map',
 
+
+
     devServer: {
         contentBase: path.join(__dirname, ''),
         compress: true,
@@ -27,6 +29,11 @@ module.exports = {
                 test: /\.tsx?$/,
                 use: 'ts-loader',
                 exclude: /node_modules/,
+            },
+
+            {
+                test: /\.svg$/,
+                use: ['@svgr/webpack'],
             },
         ],
     },
