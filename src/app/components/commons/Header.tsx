@@ -21,14 +21,16 @@ export const Header = () => {
     const classes = useStyles();
 
     return (
-        <AppBar position='static' className={classes.appBar}>
-            <Toolbar>
-                <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                    <SvgIcon component={HeaderIcon} viewBox="0 0 500 500" color="secondary"/>
-                </IconButton>
-                <Button href="/" color="inherit">Home</Button>
-                <Button href="/champion" color="inherit">Champions</Button>
-            </Toolbar>
-        </AppBar>
+        <React.Fragment>
+            <AppBar position='static' className={classes.appBar}>
+                <Toolbar>
+                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                        <SvgIcon component={HeaderIcon} viewBox="0 0 500 500" color="secondary"/>
+                    </IconButton>
+                    <Button href="/" color="inherit">Home</Button>
+                    <Button href="/champion" color="inherit">Champions</Button>
+                </Toolbar>
+            </AppBar>
+        </React.Fragment>
     );
 }

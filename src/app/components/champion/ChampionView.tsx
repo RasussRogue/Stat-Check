@@ -2,14 +2,15 @@ import * as React from 'react';
 import {FC} from "react";
 import {
     Avatar,
-    Box,
+    Box, Fade,
     Grid,
     List,
     ListItem,
     ListItemAvatar,
     ListItemText,
     Slider,
-    TextField, Theme,
+    TextField,
+    Theme, Tooltip, Typography, withStyles,
 } from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
 import {mdiSword, mdiFire, mdiPlusOutline, mdiFlash, mdiShield, mdiAxe, mdiCircleSlice8, mdiRunFast} from '@mdi/js';
@@ -28,26 +29,46 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
     const useStyles = makeStyles((theme: Theme) => ({
         icon: {
             verticalAlign: 'bottom',
-            height: 25,
-            width: 25,
+            height: 30,
+            width: 30,
+            color: theme.palette.secondary.main
         },
-        slider: {
-            paddingTop: '14%'
-        },
-        statBox: {
-            backgroundColor: theme.palette.primary.main
+        componentBox: {
+            backgroundColor: theme.palette.primary.main,
+            marginTop: '35px'
         },
         avatarSearch: {
-            height: '22%',
-            width: '22%',
-            marginRight:'5%'
-        }
+            height: '50px',
+            width: '50px',
+            marginRight: '5%'
+        },
+        avatarDisplay: {
+            height: '75px',
+            width: '75px',
+            marginRight: '20px'
+        },
+        itemTextSizePrimary: {
+            fontSize:'2em'
+        },
+        itemTextSizeSecondary: {
+            fontSize:'1.3em'
+        },
+        abilityIcon: {
+            marginRight: '3.6%'
+        },
     }));
 
     const classes = useStyles();
 
+    const AbilityTooltip = withStyles((theme: Theme) => ({
+        tooltip: {
+            backgroundColor: theme.palette.primary.main,
+            fontSize: 14
+        }
+    }))(Tooltip)
+
     return (
-        <List component="nav" aria-label="secondary mailbox folders" style={{width: '18%', margin:'auto'}}>
+        <List component="nav" aria-label="secondary mailbox folders">
             <Autocomplete
                 id="champion-box-complete"
                 options={championsList}
@@ -55,7 +76,8 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
                 onChange={callback}
                 renderOption={(option) => (
                     <React.Fragment>
-                        <Avatar className={classes.avatarSearch} src={"http://ddragon.leagueoflegends.com/cdn/11.6.1/img/champion/"+option.name+".png"}/>
+                        <Avatar className={classes.avatarSearch}
+                                src={"https://ddragon.leagueoflegends.com/cdn/11.6.1/img/champion/" + option.name + ".png"}/>
                         {option.name}
                     </React.Fragment>
                 )}
@@ -67,53 +89,108 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
 
             <ListItem key='IDCard'>
                 <ListItemAvatar>
-                    <Avatar alt={champion.name} variant='square'
-                            src={"http://ddragon.leagueoflegends.com/cdn/11.6.1/img/champion/"+champion.name+".png"}/>
+                    <Avatar className={classes.avatarDisplay} alt={champion.name} variant='square'
+                            src={"https://ddragon.leagueoflegends.com/cdn/11.6.1/img/champion/" + champion.name + ".png"}/>
                 </ListItemAvatar>
-                <ListItemText primary={champion.name} secondary={champion.title}/>
-            </ListItem>
-
-            <ListItem key='LevelSlider'>
-                <Slider
-                    className={classes.slider}
-                    defaultValue={1}
-                    aria-labelledby="discrete-slider"
-                    valueLabelDisplay="on"
-                    step={1}
-                    marks
-                    min={1}
-                    max={18}
-                    color={"primary"}
+                <ListItemText
+                    classes={{
+                        primary:classes.itemTextSizePrimary,
+                        secondary:classes.itemTextSizeSecondary }}
+                    primary={champion.name}
+                    secondary={champion.title}
                 />
             </ListItem>
-            <Box border={2} borderColor={"primary.main"} borderRadius={"borderRadius"} className={classes.statBox} boxShadow={3}>
+
+            <ListItem key='Abilities'>
+                <AbilityTooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} arrow title={
+                    <React.Fragment>
+                        <Typography color="inherit">Deathbringer Stance</Typography><br/>
+                        Periodically, Aatrox's next basic attack deals bonus physical damage and heals him, based on the target's max health.
+                    </React.Fragment>}>
+                    <Avatar className={classes.abilityIcon} alt={champion.name} variant='square'
+                            src={"https://ddragon.leagueoflegends.com/cdn/11.8.1/img/passive/Aatrox_Passive.png"}/>
+                </AbilityTooltip>
+
+                <AbilityTooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} arrow title={
+                    <React.Fragment>
+                        <Typography color="inherit">The Darkin Blade</Typography><br/>
+                        Aatrox slams his greatsword down, dealing physical damage. He can swing three times, each with a different area of effect.
+                    </React.Fragment>}>
+                    <Avatar className={classes.abilityIcon} alt={champion.name} variant='square'
+                            src={"https://ddragon.leagueoflegends.com/cdn/11.6.1/img/spell/AatroxQ.png"}/>
+                </AbilityTooltip>
+
+                <AbilityTooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} arrow title={
+                    <React.Fragment>
+                        <Typography color="inherit">Infernal Chains</Typography><br/>
+                        Aatrox smashes the ground, dealing damage to the first enemy hit. Champions and large monsters have to leave the impact area quickly or they will be dragged to the center and take the damage again.
+                    </React.Fragment>}>
+                    <Avatar className={classes.abilityIcon} alt={champion.name} variant='square'
+                            src={"https://ddragon.leagueoflegends.com/cdn/11.6.1/img/spell/AatroxW.png"}/>
+                </AbilityTooltip>
+
+                <AbilityTooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} arrow title={
+                    <React.Fragment>
+                        <Typography color="inherit">Umbral Dash</Typography><br/>
+                        Passively, Aatrox heals when damaging enemy champions. On activation, he dashes in a direction.
+                    </React.Fragment>}>
+                    <Avatar className={classes.abilityIcon} alt={champion.name} variant='square'
+                            src={"https://ddragon.leagueoflegends.com/cdn/11.6.1/img/spell/AatroxE.png"}/>
+                </AbilityTooltip>
+
+                <AbilityTooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} arrow title={
+                    <React.Fragment>
+                        <Typography color="inherit">World Ender</Typography><br/>
+                        Aatrox unleashes his demonic form, fearing nearby enemy minions and gaining attack damage, increased healing, and movement speed. If he gets a takedown, this effect is extended.
+                    </React.Fragment>}>
+                    <Avatar className={classes.abilityIcon} alt={champion.name} variant='square'
+                            src={"https://ddragon.leagueoflegends.com/cdn/11.6.1/img/spell/AatroxR.png"}/>
+                </AbilityTooltip>
+            </ListItem>
+
+            <Box borderRadius={"borderRadius"} className={classes.componentBox} boxShadow={5}>
+                <ListItem key='LevelSlider'>
+                    <Slider
+                        defaultValue={1}
+                        aria-labelledby="discrete-slider"
+                        valueLabelDisplay="on"
+                        step={1}
+                        marks
+                        min={1}
+                        max={18}
+                        color={"secondary"}
+                    />
+                </ListItem>
+            </Box>
+
+            <Box borderRadius={"borderRadius"} className={classes.componentBox} boxShadow={5}>
                 <ListItem key='Stats'>
-                <Grid container spacing={2} alignItems={"baseline"} justify={"space-between"}>
-                    <Grid item xs={6}>
-                        <Icon className={classes.icon} path={mdiFire}/> 0
+                    <Grid container spacing={2}>
+                        <Grid item xs={4}>
+                            <Icon className={classes.icon} path={mdiFire}/> 0
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Icon className={classes.icon} path={mdiSword}/> 0.651
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Icon className={classes.icon} path={mdiPlusOutline}/> 580
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Icon className={classes.icon} path={mdiFlash}/> 0
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Icon className={classes.icon} path={mdiShield}/> 38
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Icon className={classes.icon} path={mdiAxe}/> 60
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Icon className={classes.icon} path={mdiCircleSlice8}/> 32
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Icon className={classes.icon} path={mdiRunFast}/> 580
+                        </Grid>
                     </Grid>
-                    <Grid item xs={4}>
-                        <Icon className={classes.icon} path={mdiSword}/> 0.651
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Icon className={classes.icon} path={mdiPlusOutline}/> 580
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Icon className={classes.icon} path={mdiFlash}/> 0
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Icon className={classes.icon} path={mdiShield}/> 38
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Icon className={classes.icon} path={mdiAxe}/> 60
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Icon className={classes.icon} path={mdiCircleSlice8}/> 32
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Icon className={classes.icon} path={mdiRunFast}/> 580
-                    </Grid>
-                  </Grid>
                 </ListItem>
             </Box>
         </List>
