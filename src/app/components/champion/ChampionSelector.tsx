@@ -24,7 +24,7 @@ export const ChampionSelector = () => {
             const payload = response as Data
             const champs = Object.values(payload.data) as Champion[]
             const champion = champs[0]
-            setChampion(champion as Champion)
+            //setChampion(champion as Champion)
         })
     }
 
