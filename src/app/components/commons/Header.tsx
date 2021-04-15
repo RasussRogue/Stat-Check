@@ -1,5 +1,5 @@
 import * as React from "react";
-import {AppBar, Button, createStyles, IconButton, SvgIcon, Theme, Toolbar, Typography} from "@material-ui/core";
+import {AppBar, Button, createStyles, IconButton, SvgIcon, Theme, Toolbar} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import HeaderIcon from "../../icons/header-icon.svg";
 
@@ -30,7 +30,7 @@ export const Header = () => {
                     </IconButton>
                     <Button href="/" color="inherit">Home</Button>
                     <Button href="/champion" color="inherit">Champions</Button>
-                    <Typography variant="h4" className={classes.typography}>Stat Check</Typography>
+                    <h1 className={classes.typography}>Stat Check</h1>
                 </Toolbar>
             </AppBar>
         </React.Fragment>

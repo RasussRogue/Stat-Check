@@ -35,23 +35,22 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
         },
         componentBox: {
             backgroundColor: theme.palette.primary.main,
-            marginTop: '35px'
+            marginTop: '6%'
         },
         avatarSearch: {
-            height: '50px',
-            width: '50px',
+            height: '12%',
+            width: '12%',
             marginRight: '5%'
         },
         avatarDisplay: {
-            height: '75px',
-            width: '75px',
-            marginRight: '20px'
+            height: '70%',
+            width: '70%',
         },
         itemTextSizePrimary: {
-            fontSize:'2em'
+            fontSize: '2em'
         },
         itemTextSizeSecondary: {
-            fontSize:'1.3em'
+            fontSize: '1.3em'
         },
         abilityIcon: {
             marginRight: '3.6%'
@@ -94,42 +93,47 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
                 </ListItemAvatar>
                 <ListItemText
                     classes={{
-                        primary:classes.itemTextSizePrimary,
-                        secondary:classes.itemTextSizeSecondary }}
+                        primary: classes.itemTextSizePrimary,
+                        secondary: classes.itemTextSizeSecondary
+                    }}
                     primary={champion.name}
                     secondary={champion.title}
                 />
             </ListItem>
 
             <ListItem key='Abilities'>
-                <AbilityTooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} arrow title={
+                <AbilityTooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} arrow title={
                     <React.Fragment>
                         <Typography color="inherit">Deathbringer Stance</Typography><br/>
-                        Periodically, Aatrox's next basic attack deals bonus physical damage and heals him, based on the target's max health.
+                        Periodically, Aatrox's next basic attack deals bonus physical damage and heals him, based on the
+                        target's max health.
                     </React.Fragment>}>
                     <Avatar className={classes.abilityIcon} alt={champion.name} variant='square'
                             src={"https://ddragon.leagueoflegends.com/cdn/11.8.1/img/passive/Aatrox_Passive.png"}/>
                 </AbilityTooltip>
 
-                <AbilityTooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} arrow title={
+                <AbilityTooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} arrow title={
                     <React.Fragment>
                         <Typography color="inherit">The Darkin Blade</Typography><br/>
-                        Aatrox slams his greatsword down, dealing physical damage. He can swing three times, each with a different area of effect.
+                        Aatrox slams his greatsword down, dealing physical damage. He can swing three times, each with a
+                        different area of effect.
                     </React.Fragment>}>
                     <Avatar className={classes.abilityIcon} alt={champion.name} variant='square'
                             src={"https://ddragon.leagueoflegends.com/cdn/11.6.1/img/spell/AatroxQ.png"}/>
                 </AbilityTooltip>
 
-                <AbilityTooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} arrow title={
+                <AbilityTooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} arrow title={
                     <React.Fragment>
                         <Typography color="inherit">Infernal Chains</Typography><br/>
-                        Aatrox smashes the ground, dealing damage to the first enemy hit. Champions and large monsters have to leave the impact area quickly or they will be dragged to the center and take the damage again.
+                        Aatrox smashes the ground, dealing damage to the first enemy hit. Champions and large monsters
+                        have to leave the impact area quickly or they will be dragged to the center and take the damage
+                        again.
                     </React.Fragment>}>
                     <Avatar className={classes.abilityIcon} alt={champion.name} variant='square'
                             src={"https://ddragon.leagueoflegends.com/cdn/11.6.1/img/spell/AatroxW.png"}/>
                 </AbilityTooltip>
 
-                <AbilityTooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} arrow title={
+                <AbilityTooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} arrow title={
                     <React.Fragment>
                         <Typography color="inherit">Umbral Dash</Typography><br/>
                         Passively, Aatrox heals when damaging enemy champions. On activation, he dashes in a direction.
@@ -138,10 +142,11 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
                             src={"https://ddragon.leagueoflegends.com/cdn/11.6.1/img/spell/AatroxE.png"}/>
                 </AbilityTooltip>
 
-                <AbilityTooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} arrow title={
+                <AbilityTooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} arrow title={
                     <React.Fragment>
                         <Typography color="inherit">World Ender</Typography><br/>
-                        Aatrox unleashes his demonic form, fearing nearby enemy minions and gaining attack damage, increased healing, and movement speed. If he gets a takedown, this effect is extended.
+                        Aatrox unleashes his demonic form, fearing nearby enemy minions and gaining attack damage,
+                        increased healing, and movement speed. If he gets a takedown, this effect is extended.
                     </React.Fragment>}>
                     <Avatar className={classes.abilityIcon} alt={champion.name} variant='square'
                             src={"https://ddragon.leagueoflegends.com/cdn/11.6.1/img/spell/AatroxR.png"}/>
