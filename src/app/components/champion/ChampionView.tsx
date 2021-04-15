@@ -17,6 +17,7 @@ import {mdiSword, mdiFire, mdiPlusOutline, mdiFlash, mdiShield, mdiAxe, mdiCircl
 import {Icon} from '@mdi/react'
 import {Champion} from "../model/models";
 import {Autocomplete} from "@material-ui/lab";
+import {getUrlChampionAvatar, getUrlPassive, getUrlSpell} from "../../config/config";
 
 type ChampionProps = Readonly<{
     champion: Champion
@@ -76,7 +77,7 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
                 renderOption={(option) => (
                     <React.Fragment>
                         <Avatar className={classes.avatarSearch}
-                                src={"https://ddragon.leagueoflegends.com/cdn/11.6.1/img/champion/" + option.name + ".png"}/>
+                                src={getUrlChampionAvatar(option.name+".png")}/>
                         {option.name}
                     </React.Fragment>
                 )}
@@ -89,7 +90,7 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
             <ListItem key='IDCard'>
                 <ListItemAvatar>
                     <Avatar className={classes.avatarDisplay} alt={champion.name} variant='square'
-                            src={"https://ddragon.leagueoflegends.com/cdn/11.6.1/img/champion/" + champion.name + ".png"}/>
+                            src={getUrlChampionAvatar(champion.name+".png")}/>
                 </ListItemAvatar>
                 <ListItemText
                     classes={{
@@ -109,7 +110,7 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
                         target's max health.
                     </React.Fragment>}>
                     <Avatar className={classes.abilityIcon} alt={champion.name} variant='square'
-                            src={"https://ddragon.leagueoflegends.com/cdn/11.8.1/img/passive/Aatrox_Passive.png"}/>
+                            src={getUrlPassive("Aatrox_Passive.png")}/>
                 </AbilityTooltip>
 
                 <AbilityTooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} arrow title={
@@ -119,7 +120,7 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
                         different area of effect.
                     </React.Fragment>}>
                     <Avatar className={classes.abilityIcon} alt={champion.name} variant='square'
-                            src={"https://ddragon.leagueoflegends.com/cdn/11.6.1/img/spell/AatroxQ.png"}/>
+                            src={getUrlSpell("AatroxQ.png")}/>
                 </AbilityTooltip>
 
                 <AbilityTooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} arrow title={
@@ -130,7 +131,7 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
                         again.
                     </React.Fragment>}>
                     <Avatar className={classes.abilityIcon} alt={champion.name} variant='square'
-                            src={"https://ddragon.leagueoflegends.com/cdn/11.6.1/img/spell/AatroxW.png"}/>
+                            src={getUrlSpell("AatroxW.png")}/>
                 </AbilityTooltip>
 
                 <AbilityTooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} arrow title={
@@ -139,7 +140,7 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
                         Passively, Aatrox heals when damaging enemy champions. On activation, he dashes in a direction.
                     </React.Fragment>}>
                     <Avatar className={classes.abilityIcon} alt={champion.name} variant='square'
-                            src={"https://ddragon.leagueoflegends.com/cdn/11.6.1/img/spell/AatroxE.png"}/>
+                            src={getUrlSpell("AatroxE.png")}/>
                 </AbilityTooltip>
 
                 <AbilityTooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} arrow title={
@@ -149,7 +150,7 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
                         increased healing, and movement speed. If he gets a takedown, this effect is extended.
                     </React.Fragment>}>
                     <Avatar className={classes.abilityIcon} alt={champion.name} variant='square'
-                            src={"https://ddragon.leagueoflegends.com/cdn/11.6.1/img/spell/AatroxR.png"}/>
+                            src={getUrlSpell("AatroxR.png")}/>
                 </AbilityTooltip>
             </ListItem>
 

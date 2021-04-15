@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {Champion, Data} from "../model/models";
 import {ChampionView} from "./ChampionView";
 import axios from 'axios';
+import {getUrlChampion, getUrlChampionList} from "../../config/config";
 
 
 export const ChampionSelector = () => {
@@ -15,7 +16,7 @@ export const ChampionSelector = () => {
     }, [])
 
     function fetchChampionList() {
-        axios.get(`https://ddragon.leagueoflegends.com/cdn/11.8.1/data/en_US/champion.json`, {}).then(response => {
+        axios.get(getUrlChampionList(), {}).then(response => {
             const payload = response.data as Data
             const champs = Object.values(payload.data) as Champion[]
             console.log(champs)
@@ -24,7 +25,7 @@ export const ChampionSelector = () => {
     }
 
     function loadChampion() {
-        axios.get(`https://ddragon.leagueoflegends.com/cdn/11.6.1/data/en_US/champion/Aatrox.json`, {}).then(response => {
+        axios.get(getUrlChampion(champion.name), {}).then(response => {
             const payload = response.data as Data
             const champs = Object.values(payload.data) as Champion[]
             const champion = champs[0]
