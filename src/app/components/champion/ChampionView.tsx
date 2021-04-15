@@ -36,6 +36,11 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
         },
         statBox: {
             backgroundColor: theme.palette.primary.main
+        },
+        avatarSearch: {
+            height: '22%',
+            width: '22%',
+            marginRight:'5%'
         }
     }));
 
@@ -48,9 +53,15 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
                 options={championsList}
                 getOptionLabel={(option) => option.name}
                 onChange={callback}
+                renderOption={(option) => (
+                    <React.Fragment>
+                        <Avatar className={classes.avatarSearch} src={"http://ddragon.leagueoflegends.com/cdn/11.6.1/img/champion/"+option.name+".png"}/>
+                        {option.name}
+                    </React.Fragment>
+                )}
                 getOptionSelected={(option, value) => value.name === option.name}
                 renderInput={
-                    (params) => <TextField {...params}  label="Champion" variant="outlined"/>
+                    (params) => <TextField {...params} label="Champion" variant="outlined"/>
                 }
             />
 
@@ -75,35 +86,34 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
                     color={"primary"}
                 />
             </ListItem>
-
             <Box border={2} borderColor={"primary.main"} borderRadius={"borderRadius"} className={classes.statBox} boxShadow={3}>
                 <ListItem key='Stats'>
-                    <Grid container spacing={3}>
-                        <Grid item xs={6}>
-                            <Icon className={classes.icon} path={mdiFire} /> 0
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Icon className={classes.icon} path={mdiSword}/> 0.651
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Icon className={classes.icon} path={mdiPlusOutline}/> 580
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Icon className={classes.icon} path={mdiFlash}/> 0
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Icon className={classes.icon} path={mdiShield}/> 38
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Icon className={classes.icon} path={mdiAxe}/> 60
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Icon className={classes.icon} path={mdiCircleSlice8}/> 32
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Icon className={classes.icon} path={mdiRunFast}/> 580
-                        </Grid>
+                <Grid container spacing={2} alignItems={"baseline"} justify={"space-between"}>
+                    <Grid item xs={6}>
+                        <Icon className={classes.icon} path={mdiFire}/> 0
                     </Grid>
+                    <Grid item xs={4}>
+                        <Icon className={classes.icon} path={mdiSword}/> 0.651
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Icon className={classes.icon} path={mdiPlusOutline}/> 580
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Icon className={classes.icon} path={mdiFlash}/> 0
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Icon className={classes.icon} path={mdiShield}/> 38
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Icon className={classes.icon} path={mdiAxe}/> 60
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Icon className={classes.icon} path={mdiCircleSlice8}/> 32
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Icon className={classes.icon} path={mdiRunFast}/> 580
+                    </Grid>
+                  </Grid>
                 </ListItem>
             </Box>
         </List>
