@@ -33,7 +33,7 @@ I also decided solely use **external APIs** (Riot Games DataDragon for example) 
 For the color choice, I based myself off of [**this article**](https://www.smashingmagazine.com/2016/04/web-developer-guide-color/), which I found both helpful and simple to apply.
 I ended up with the following colors for my app :
 
-|Color       | Hexa        |
+| Color      | Hexa        |
 | ---        | ---         |
 | Primary    | **#17172E** |
 | Secondary  | **#3273FA** |
