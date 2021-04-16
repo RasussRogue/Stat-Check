@@ -1,4 +1,4 @@
-# ReactChamps
+# Stat Check
 
 [Lien du Trello](https://trello.com/b/uc8WwvZB/stat-check)
 
@@ -19,8 +19,6 @@ This project is a way for me to practice and perfect my React programming skills
 | Webpack Dev Server|3.11.2|https://webpack.js.org/configuration/dev-server/|
 
 ## Choices
-
-I use **React Hooks** in my project over React class components, as it allows
 
 I choose to use **Material-UI** for its ease of setup and utilisation, which allows me to focus more on learning React and other techs rather than spend too much time on style etc...
 
