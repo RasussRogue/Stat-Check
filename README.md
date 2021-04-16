@@ -1,6 +1,6 @@
 # ReactChamps
 
-[Trello](https://trello.com/b/uc8WwvZB/stat-check)
+[Lien du Trello](https://trello.com/b/uc8WwvZB/stat-check)
 
 ## Goal
 This project is a way for me to practice and perfect my React programming skills. It is a learning tool that allows me to experiment and try various things out when it comes to front-end development. It also allows me to discover new technologies and learn to master them, all based around a theme that personnaly interests me : video games, and particularly League of Legends.
@@ -9,10 +9,11 @@ This project is a way for me to practice and perfect my React programming skills
 
 |  Software |  Version |  Link |
 |---|---|---|
-| React |17.0.1|https://fr.reactjs.org/|
-| React Router |5.2.0|https://reactrouter.com/web/guides/quick-start|
+| Axios | 0.21.1  |  https://axios-http.com/docs/intro/ |
 | Material-UI | 4.11.2  |  https://material-ui.com/ |
 | MDI (Material Design Icons |5.9.55|https://materialdesignicons.com/|
+| React |17.0.1|https://fr.reactjs.org/|
+| React Router |5.2.0|https://reactrouter.com/web/guides/quick-start|
 | Typescript |4.1.5|https://www.typescriptlang.org/docs/|
 | Webpack |5.21.2| https://webpack.js.org/concepts/ |
 | Webpack Dev Server|3.11.2|https://webpack.js.org/configuration/dev-server/|
@@ -34,11 +35,10 @@ I ended up with the following colors for my app :
 
 |Color       | Hexa        |
 | ---        | ---         |
-| Primary    | **#D0A85C** |
-| Secondary  | **#455D8B** |
+| Primary    | **#17172E** |
+| Secondary  | **#3273FA** |
 | Dark gray  | **#434449** |
 | Light gray | **#EAEBF0** |
-| White      | **#FFFFFF** |
 
 
 ## Commands to run
@@ -47,7 +47,7 @@ I ended up with the following colors for my app :
 npm run watch
 (to start webpack)
 
-npm run start 
+npm run serve 
 (to start the webpack server)
 ``` 
 
