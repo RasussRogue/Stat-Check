@@ -13,7 +13,6 @@ import {
     TextField,
     Theme,
     Tooltip,
-    Typography,
     withStyles,
 } from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
@@ -72,6 +71,7 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
     }))(Tooltip)
 
     function cleanDescription(description:string) {
+        //This cleans the argument of any content in <tags>. Thanks Riot, I hate regexes.
         return description.replace(/<[^>]*>/g, '')
     }
 
@@ -113,7 +113,7 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
             <ListItem key='Abilities'>
                 <AbilityTooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} arrow title={
                     <React.Fragment>
-                        <Typography color="inherit">{champion.passive.name}</Typography><br/>
+                        <h2 color="inherit">{champion.passive.name}</h2><br/>
                         {cleanDescription(champion.passive.description)}
                     </React.Fragment>}>
                     <Avatar className={classes.abilityIcon} alt={champion.name} variant='square'
@@ -122,7 +122,7 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
 
                 <AbilityTooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} arrow title={
                     <React.Fragment>
-                        <Typography color="inherit">{champion.spells[0].name}</Typography><br/>
+                        <h2 color="inherit">{champion.spells[0].name}</h2><br/>
                         {cleanDescription(champion.spells[0].description)}
                     </React.Fragment>}>
                     <Avatar className={classes.abilityIcon} alt={champion.name} variant='square'
@@ -131,7 +131,7 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
 
                 <AbilityTooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} arrow title={
                     <React.Fragment>
-                        <Typography color="inherit">{champion.spells[1].name}</Typography><br/>
+                        <h2 color="inherit">{champion.spells[1].name}</h2><br/>
                         {cleanDescription(champion.spells[1].description)}
                     </React.Fragment>}>
                     <Avatar className={classes.abilityIcon} alt={champion.name} variant='square'
@@ -140,7 +140,7 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
 
                 <AbilityTooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} arrow title={
                     <React.Fragment>
-                        <Typography color="inherit">{champion.spells[2].name}</Typography><br/>
+                        <h2 color="inherit">{champion.spells[2].name}</h2><br/>
                         {cleanDescription(champion.spells[2].description)}
                     </React.Fragment>}>
                     <Avatar className={classes.abilityIcon} alt={champion.name} variant='square'
@@ -149,7 +149,7 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
 
                 <AbilityTooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} arrow title={
                     <React.Fragment>
-                        <Typography color="inherit">{champion.spells[3].name}</Typography><br/>
+                        <h2 color="inherit">{champion.spells[3].name}</h2><br/>
                         {cleanDescription(champion.spells[3].description)}
                     </React.Fragment>}>
                     <Avatar className={classes.abilityIcon} alt={champion.name} variant='square'

@@ -12,6 +12,9 @@ const useStyles = makeStyles<Theme>((theme) => ({
             color: theme.palette.common.white,
             height: '100%',
             background: '#070720'
+        },
+        h2:  {
+            fontSize: '1.25em'
         }
     }
 }))

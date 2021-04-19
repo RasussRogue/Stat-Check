@@ -11,8 +11,7 @@ export const ChampionSelector = () => {
     const [championsList, setChampionsList] = useState<Champion[]>([]);
 
     useEffect(() => {
-        if (championsList.length == 0) fetchChampionList()
-        loadChampion(champion.id);
+        fetchChampionList()
     }, [])
 
     function fetchChampionList() {
@@ -34,7 +33,9 @@ export const ChampionSelector = () => {
 
     const handleTextViewChange = useCallback(
         (event, champion) => {
-            if (champion) loadChampion(champion.id)
+            if (champion) {
+                loadChampion(champion.id)
+            }
         },
         [],
     );
