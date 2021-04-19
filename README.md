@@ -20,6 +20,8 @@ This project is a way for me to practice and perfect my React programming skills
 
 ## Choices
 
+I went for the use of **React Hooks** instead of class based components due to their general ease of execution concerning states (useState and useEffect in particular making it much simpler to program). Furthermore, being in a phase of learning React, I would rather start with a more efficient and powerful method of development without getting used to class-based component first, as it will almost force me to un-learn certain habits once I would switch to hooks.
+
 I choose to use **Material-UI** for its ease of setup and utilisation, which allows me to focus more on learning React and other techs rather than spend too much time on style etc...
 
 I also decided to go for **Typescript** over native Javascript, as I have the background of a OOP developer (I mostly studied programming through Java) and thus feel more familiar and performant with TypeScript.
@@ -28,8 +30,7 @@ I decided to use **Webpack** for an easier loading of my assets (such as CSS and
 
 I also decided solely use **external APIs** (Riot Games DataDragon for example) as my goal for this project is not to set up my own backend (which I could), but rather to focus on learning front-end development.
 
-For the color choice, I based myself off of [**this article**](https://www.smashingmagazine.com/2016/04/web-developer-guide-color/), which I found both helpful and simple to apply.
-I ended up with the following colors for my app :
+For the color choice, I based myself off of [**this article**](https://www.smashingmagazine.com/2016/04/web-developer-guide-color/), which I found both helpful and simple to apply. I ended up with the following colors for my app :
 
 | Color      | Hexa        |
 | ---        | ---         |
