@@ -1,8 +1,9 @@
 import * as React from 'react';
-import {FC} from "react";
+import {FC} from 'react';
 import {
     Avatar,
-    Box, Fade,
+    Box,
+    Fade,
     Grid,
     List,
     ListItem,
@@ -10,13 +11,16 @@ import {
     ListItemText,
     Slider,
     TextField,
-    Theme, Tooltip, Typography, withStyles,
+    Theme,
+    Tooltip,
+    withStyles,
 } from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
-import {mdiSword, mdiFire, mdiPlusOutline, mdiFlash, mdiShield, mdiAxe, mdiCircleSlice8, mdiRunFast} from '@mdi/js';
+import {mdiAxe, mdiCircleSlice8, mdiWater, mdiFlash, mdiPlusOutline, mdiRunFast, mdiShield, mdiSword} from '@mdi/js';
 import {Icon} from '@mdi/react'
 import {Champion} from "../model/models";
 import {Autocomplete} from "@material-ui/lab";
+import {getUrlChampionAvatar, getUrlPassive, getUrlSpell} from "../../config/config";
 
 type ChampionProps = Readonly<{
     champion: Champion
@@ -66,6 +70,11 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
         }
     }))(Tooltip)
 
+    function cleanDescription(description:string) {
+        //This cleans the argument of any content in <tags>. Thanks Riot, I hate regexes.
+        return description.replace(/<[^>]*>/g, '')
+    }
+
     return (
         <List component="nav" aria-label="secondary mailbox folders">
             <Autocomplete
@@ -75,8 +84,8 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
                 onChange={callback}
                 renderOption={(option) => (
                     <React.Fragment>
-                        <Avatar className={classes.avatarSearch}
-                                src={"https://ddragon.leagueoflegends.com/cdn/11.6.1/img/champion/" + option.name + ".png"}/>
+                        <Avatar className={classes.avatarSearch} variant='square'
+                                src={getUrlChampionAvatar(option.image.full)}/>
                         {option.name}
                     </React.Fragment>
                 )}
@@ -89,7 +98,7 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
             <ListItem key='IDCard'>
                 <ListItemAvatar>
                     <Avatar className={classes.avatarDisplay} alt={champion.name} variant='square'
-                            src={"https://ddragon.leagueoflegends.com/cdn/11.6.1/img/champion/" + champion.name + ".png"}/>
+                            src={getUrlChampionAvatar(champion.image.full)}/>
                 </ListItemAvatar>
                 <ListItemText
                     classes={{
@@ -104,52 +113,47 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
             <ListItem key='Abilities'>
                 <AbilityTooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} arrow title={
                     <React.Fragment>
-                        <Typography color="inherit">Deathbringer Stance</Typography><br/>
-                        Periodically, Aatrox's next basic attack deals bonus physical damage and heals him, based on the
-                        target's max health.
+                        <h2 color="inherit">{champion.passive.name}</h2><br/>
+                        {cleanDescription(champion.passive.description)}
                     </React.Fragment>}>
                     <Avatar className={classes.abilityIcon} alt={champion.name} variant='square'
-                            src={"https://ddragon.leagueoflegends.com/cdn/11.8.1/img/passive/Aatrox_Passive.png"}/>
+                            src={getUrlPassive(champion.passive.image.full)}/>
                 </AbilityTooltip>
 
                 <AbilityTooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} arrow title={
                     <React.Fragment>
-                        <Typography color="inherit">The Darkin Blade</Typography><br/>
-                        Aatrox slams his greatsword down, dealing physical damage. He can swing three times, each with a
-                        different area of effect.
+                        <h2 color="inherit">{champion.spells[0].name}</h2><br/>
+                        {cleanDescription(champion.spells[0].description)}
                     </React.Fragment>}>
                     <Avatar className={classes.abilityIcon} alt={champion.name} variant='square'
-                            src={"https://ddragon.leagueoflegends.com/cdn/11.6.1/img/spell/AatroxQ.png"}/>
+                            src={getUrlSpell(champion.spells[0].image.full)}/>
                 </AbilityTooltip>
 
                 <AbilityTooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} arrow title={
                     <React.Fragment>
-                        <Typography color="inherit">Infernal Chains</Typography><br/>
-                        Aatrox smashes the ground, dealing damage to the first enemy hit. Champions and large monsters
-                        have to leave the impact area quickly or they will be dragged to the center and take the damage
-                        again.
+                        <h2 color="inherit">{champion.spells[1].name}</h2><br/>
+                        {cleanDescription(champion.spells[1].description)}
                     </React.Fragment>}>
                     <Avatar className={classes.abilityIcon} alt={champion.name} variant='square'
-                            src={"https://ddragon.leagueoflegends.com/cdn/11.6.1/img/spell/AatroxW.png"}/>
+                            src={getUrlSpell(champion.spells[1].image.full)}/>
                 </AbilityTooltip>
 
                 <AbilityTooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} arrow title={
                     <React.Fragment>
-                        <Typography color="inherit">Umbral Dash</Typography><br/>
-                        Passively, Aatrox heals when damaging enemy champions. On activation, he dashes in a direction.
+                        <h2 color="inherit">{champion.spells[2].name}</h2><br/>
+                        {cleanDescription(champion.spells[2].description)}
                     </React.Fragment>}>
                     <Avatar className={classes.abilityIcon} alt={champion.name} variant='square'
-                            src={"https://ddragon.leagueoflegends.com/cdn/11.6.1/img/spell/AatroxE.png"}/>
+                            src={getUrlSpell(champion.spells[2].image.full)}/>
                 </AbilityTooltip>
 
                 <AbilityTooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} arrow title={
                     <React.Fragment>
-                        <Typography color="inherit">World Ender</Typography><br/>
-                        Aatrox unleashes his demonic form, fearing nearby enemy minions and gaining attack damage,
-                        increased healing, and movement speed. If he gets a takedown, this effect is extended.
+                        <h2 color="inherit">{champion.spells[3].name}</h2><br/>
+                        {cleanDescription(champion.spells[3].description)}
                     </React.Fragment>}>
                     <Avatar className={classes.abilityIcon} alt={champion.name} variant='square'
-                            src={"https://ddragon.leagueoflegends.com/cdn/11.6.1/img/spell/AatroxR.png"}/>
+                            src={getUrlSpell(champion.spells[3].image.full)}/>
                 </AbilityTooltip>
             </ListItem>
 
@@ -172,28 +176,28 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
                 <ListItem key='Stats'>
                     <Grid container spacing={2}>
                         <Grid item xs={4}>
-                            <Icon className={classes.icon} path={mdiFire}/> 0
+                            <Icon className={classes.icon} path={mdiPlusOutline}/>{champion.stats.hp}
                         </Grid>
                         <Grid item xs={4}>
-                            <Icon className={classes.icon} path={mdiSword}/> 0.651
+                            <Icon className={classes.icon} path={mdiWater}/>{champion.stats.mp}
                         </Grid>
                         <Grid item xs={4}>
-                            <Icon className={classes.icon} path={mdiPlusOutline}/> 580
+                            <Icon className={classes.icon} path={mdiRunFast}/>{champion.stats.movespeed}
                         </Grid>
                         <Grid item xs={4}>
-                            <Icon className={classes.icon} path={mdiFlash}/> 0
+                            <Icon className={classes.icon} path={mdiShield}/>{champion.stats.armor}
                         </Grid>
                         <Grid item xs={4}>
-                            <Icon className={classes.icon} path={mdiShield}/> 38
+                            <Icon className={classes.icon} path={mdiSword}/>{champion.stats.attackdamage}
                         </Grid>
                         <Grid item xs={4}>
-                            <Icon className={classes.icon} path={mdiAxe}/> 60
+                            <Icon className={classes.icon} path={mdiFlash}/>{champion.stats.crit}
                         </Grid>
                         <Grid item xs={4}>
-                            <Icon className={classes.icon} path={mdiCircleSlice8}/> 32
+                            <Icon className={classes.icon} path={mdiCircleSlice8}/>{champion.stats.spellblock}
                         </Grid>
                         <Grid item xs={4}>
-                            <Icon className={classes.icon} path={mdiRunFast}/> 580
+                            <Icon className={classes.icon} path={mdiAxe}/>{champion.stats.attackspeed}
                         </Grid>
                     </Grid>
                 </ListItem>
