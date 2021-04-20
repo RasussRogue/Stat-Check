@@ -1,31 +1,25 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useState} from "react";
+import axios from 'axios';
 import {Champion, Data} from "../model/models";
 import {ChampionView} from "./ChampionView";
-import {getUrlChampion, getUrlChampionList} from "../../config/config";
-import axios from 'axios';
+import {getUrlChampion, getUrlChampionAvatar, getUrlChampionList} from "../../config/config";
 import {useFetchAPI} from "../../api/reducer";
+import {Autocomplete} from "@material-ui/lab";
+import {Avatar, List, TextField} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
 
 export const ChampionSelector = () => {
     const [championId, setChampionId] = useState("Aatrox")
-    const [championsList, setChampionsList] = useState<Champion[]>([]);
+    const championListState = useFetchAPI<Data>({data: {}}, () => axios.get(getUrlChampionList()))
+    const championState = useFetchAPI<Data>(undefined, () => axios.get(getUrlChampion(championId)), [championId])
 
-    useEffect(() => {
-        fetchChampionList()
-    }, [])
-
-    function fetchChampionList() {
-        axios.get(getUrlChampionList(), {}).then(response => {
-            const payload = response.data as Data
-            const champs = Object.values(payload.data) as Champion[]
-            setChampionsList(champs)
-        })
+    function extractChampionList(data: Data) {
+        return Object.values(data.data) as Champion[]
     }
 
-    function extractChampion(data:Data) {
-        return Object.values(Object.values(data)[3])[0] as Champion
+    function extractChampion(data: Data) {
+        return Object.values(data.data)[0] as Champion
     }
-
-    const {isLoading, data} = useFetchAPI<Data>(undefined, () => axios.get(getUrlChampion(championId)), [championId])
 
     const handleTextViewChange = useCallback(
         (event, championChange) => {
@@ -36,9 +30,37 @@ export const ChampionSelector = () => {
         [],
     );
 
+    const useStyles = makeStyles(() => ({
+        avatarSearch: {
+            height: '12%',
+            width: '12%',
+            marginRight: '5%'
+        }
+    }));
+
+    const classes = useStyles();
+
     return (
-        isLoading || !data ? <h1>Loading champions...</h1> :
-            // @ts-ignore
-        <ChampionView champion={extractChampion(data)} callback={handleTextViewChange} championsList={championsList}/>
+        <List component="nav" aria-label="secondary mailbox folders">
+            <Autocomplete
+                id="champion-box-complete"
+                options={extractChampionList(championListState.data as Data)}
+                getOptionLabel={(option) => option.name}
+                onChange={handleTextViewChange}
+                renderOption={(option) => (
+                    <React.Fragment>
+                        <Avatar className={classes.avatarSearch} variant='square'
+                                src={getUrlChampionAvatar(option.image.full)}/>
+                        {option.name}
+                    </React.Fragment>
+                )}
+                getOptionSelected={(option, value) => value.name === option.name}
+                renderInput={
+                    (params) => <TextField {...params} label="Champion" variant="outlined"/>
+                }
+            />
+            {championState.isLoading || !championState.data ? <h1>Loading your champion...</h1> :
+                <ChampionView champion={extractChampion(championState.data as Data)}/>}
+        </List>
     )
 }

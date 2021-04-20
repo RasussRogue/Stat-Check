@@ -38,7 +38,7 @@ const fetchReducer = <P>(state: State<P>, action: Action<P>): State<P> => {
     }
 }
 
-export const useFetchAPI = <P>(initData: P, supplier: () => AxiosPromise<P>, dependencyList:any[]) => {
+export const useFetchAPI = <P>(initData: P, supplier: () => AxiosPromise<P>, dependencyList:ReadonlyArray<any>=[]) => {
     const [state, dispatch] = useReducer(
         fetchReducer,
         {
