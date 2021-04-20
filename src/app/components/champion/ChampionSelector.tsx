@@ -3,11 +3,10 @@ import {Champion, Data} from "../model/models";
 import {ChampionView} from "./ChampionView";
 import {getUrlChampion, getUrlChampionList} from "../../config/config";
 import axios from 'axios';
-import {defaultChampion} from "./default";
-
+import {useFetchAPI} from "../../api/reducer";
 
 export const ChampionSelector = () => {
-    const [champion, setChampion] = useState<Champion>(defaultChampion);
+    const [championId, setChampionId] = useState("Aatrox")
     const [championsList, setChampionsList] = useState<Champion[]>([]);
 
     useEffect(() => {
@@ -22,25 +21,24 @@ export const ChampionSelector = () => {
         })
     }
 
-    function loadChampion(championSelected:string) {
-        axios.get(getUrlChampion(championSelected), {}).then(response => {
-            const payload = response.data as Data
-            const champs = Object.values(payload.data) as Champion[]
-            const champion = champs[0]
-            setChampion(champion as Champion)
-        })
+    function extractChampion(data:Data) {
+        return Object.values(Object.values(data)[3])[0] as Champion
     }
 
+    const {isLoading, data} = useFetchAPI<Data>(undefined, () => axios.get(getUrlChampion(championId)), [championId])
+
     const handleTextViewChange = useCallback(
-        (event, champion) => {
-            if (champion) {
-                loadChampion(champion.id)
+        (event, championChange) => {
+            if (championChange) {
+                setChampionId(championChange.id)
             }
         },
         [],
     );
 
     return (
-        <ChampionView champion={champion} callback={handleTextViewChange} championsList={championsList}/>
+        isLoading || !data ? <h1>Loading champions...</h1> :
+            // @ts-ignore
+        <ChampionView champion={extractChampion(data)} callback={handleTextViewChange} championsList={championsList}/>
     )
 }
