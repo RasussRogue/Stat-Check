@@ -15,7 +15,7 @@ export const App = () => {
             <GlobalStyleProvider>
                 <CssBaseline/>
                 <Header/>
-                <Grid container spacing={3} justify='center'>
+                <Grid container justify='center'>
                     <Grid item md={4}>
                         <Routes/>
                     </Grid>

@@ -5,30 +5,26 @@ import {
     Box,
     Fade,
     Grid,
-    List,
     ListItem,
     ListItemAvatar,
     ListItemText,
     Slider,
-    TextField,
     Theme,
     Tooltip,
     withStyles,
 } from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
-import {mdiAxe, mdiCircleSlice8, mdiWater, mdiFlash, mdiPlusOutline, mdiRunFast, mdiShield, mdiSword} from '@mdi/js';
+import {mdiAxe, mdiCircleSlice8, mdiFlash, mdiPlusOutline, mdiRunFast, mdiShield, mdiSword, mdiWater} from '@mdi/js';
 import {Icon} from '@mdi/react'
 import {Champion} from "../model/models";
-import {Autocomplete} from "@material-ui/lab";
 import {getUrlChampionAvatar, getUrlPassive, getUrlSpell} from "../../config/config";
+import {cleanDescription} from "../../misc/utils";
 
 type ChampionProps = Readonly<{
     champion: Champion
-    championsList: Champion[]
-    callback: any
 }>
 
-export const ChampionView: FC<ChampionProps> = ({champion, callback, championsList}) => {
+export const ChampionView: FC<ChampionProps> = ({champion}) => {
     document.title = "Champions"
     const useStyles = makeStyles((theme: Theme) => ({
         icon: {
@@ -40,11 +36,6 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
         componentBox: {
             backgroundColor: theme.palette.primary.main,
             marginTop: '6%'
-        },
-        avatarSearch: {
-            height: '12%',
-            width: '12%',
-            marginRight: '5%'
         },
         avatarDisplay: {
             height: '70%',
@@ -70,31 +61,8 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
         }
     }))(Tooltip)
 
-    function cleanDescription(description:string) {
-        //This cleans the argument of any content in <tags>. Thanks Riot, I hate regexes.
-        return description.replace(/<[^>]*>/g, '')
-    }
-
     return (
-        <List component="nav" aria-label="secondary mailbox folders">
-            <Autocomplete
-                id="champion-box-complete"
-                options={championsList}
-                getOptionLabel={(option) => option.name}
-                onChange={callback}
-                renderOption={(option) => (
-                    <React.Fragment>
-                        <Avatar className={classes.avatarSearch} variant='square'
-                                src={getUrlChampionAvatar(option.image.full)}/>
-                        {option.name}
-                    </React.Fragment>
-                )}
-                getOptionSelected={(option, value) => value.name === option.name}
-                renderInput={
-                    (params) => <TextField {...params} label="Champion" variant="outlined"/>
-                }
-            />
-
+        <React.Fragment>
             <ListItem key='IDCard'>
                 <ListItemAvatar>
                     <Avatar className={classes.avatarDisplay} alt={champion.name} variant='square'
@@ -202,6 +170,6 @@ export const ChampionView: FC<ChampionProps> = ({champion, callback, championsLi
                     </Grid>
                 </ListItem>
             </Box>
-        </List>
+        </React.Fragment>
     )
 }
