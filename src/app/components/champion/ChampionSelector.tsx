@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import axios from 'axios';
-import {Champion} from "../model/models";
+import {Champion, Data} from "../model/models";
 import {ChampionView} from "./ChampionView";
 import {getUrlChampion, getUrlChampionAvatar, getUrlChampionList} from "../../config/config";
 import {useFetchAPI} from "../../api/reducer";
@@ -11,8 +11,8 @@ import {extractChampion, extractChampionList} from "../../misc/utils";
 
 export const ChampionSelector = () => {
     const [championId, setChampionId] = useState("Aatrox")
-    const championListState = useFetchAPI<Champion[]>([], () => axios.get(getUrlChampionList()), [], extractChampionList)
-    const championState = useFetchAPI<Champion>(undefined, () => axios.get(getUrlChampion(championId)), [championId], extractChampion)
+    const championListState = useFetchAPI<Champion[], Data>([], () => axios.get(getUrlChampionList()), [], extractChampionList)
+    const championState = useFetchAPI<Champion, Data>(undefined, () => axios.get(getUrlChampion(championId)), [championId], extractChampion)
 
     const useStyles = makeStyles(() => ({
         avatarSearch: {
@@ -24,20 +24,17 @@ export const ChampionSelector = () => {
 
     const classes = useStyles();
 
-    //has to be an Any for TS compatibility with onChange.
-    function handleTextViewChange(e:any) {
-        if (e) {
-            setChampionId(e.target.firstElementChild.id)
-        }
-    }
-
     return (
         <List>
             <Autocomplete
                 id="champion-box-complete"
                 options={championListState.data as Champion[]}
-                getOptionLabel={(option) => option.name}
-                onChange={handleTextViewChange}
+                getOptionLabel={(option) => option.id}
+                onInputChange={(event, newInputValue) => {
+                    if (newInputValue != '') {
+                        setChampionId(newInputValue)
+                    }
+                }}
                 renderOption={(option) => (
                     <React.Fragment>
                         <Avatar id={option.id} className={classes.avatarSearch} variant='square'

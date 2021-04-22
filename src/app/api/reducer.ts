@@ -1,6 +1,6 @@
 import {useEffect, useReducer} from "react";
 import {AxiosPromise} from "axios";
-import {Data} from "../components/model/models";
+
 interface State<P> {
     data?: P
     isError: boolean
@@ -38,7 +38,7 @@ const fetchReducer = <P>(state: State<P>, action: Action<P>): State<P> => {
     }
 }
 
-export const useFetchAPI = <P>(initData: P, supplier: () => AxiosPromise<Data>, dependencyList:ReadonlyArray<any>=[], transformer?: (data:Data) => P) => {
+export const useFetchAPI = <P, T>(initData: P, supplier: () => AxiosPromise<T>, dependencyList:ReadonlyArray<any>=[], transformer?: (data:T) => P) => {
     const [state, dispatch] = useReducer(
         fetchReducer,
         {
