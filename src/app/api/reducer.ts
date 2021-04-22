@@ -38,7 +38,7 @@ const fetchReducer = <P>(state: State<P>, action: Action<P>): State<P> => {
     }
 }
 
-export const useFetchAPI = <P, T>(initData: P, supplier: () => AxiosPromise<T>, dependencyList:ReadonlyArray<any>=[], transformer?: (data:T) => P) => {
+export const useFetchAPI = <P, T=P>(initData: T, supplier: () => AxiosPromise<P>, dependencyList:ReadonlyArray<any>=[], transformer?: (data:P) => T) => {
     const [state, dispatch] = useReducer(
         fetchReducer,
         {
