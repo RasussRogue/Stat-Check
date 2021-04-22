@@ -15,6 +15,10 @@ const useStyles = makeStyles<Theme>((theme) => ({
         },
         h2:  {
             fontSize: '1.25em'
+        },
+        h3: {
+            fontSize: '1em',
+            color: theme.palette.secondary.light
         }
     }
 }))
