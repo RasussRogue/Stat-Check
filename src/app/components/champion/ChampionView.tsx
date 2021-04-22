@@ -18,6 +18,7 @@ import {mdiAxe, mdiCircleSlice8, mdiFlash, mdiPlusOutline, mdiRunFast, mdiShield
 import {Icon} from '@mdi/react'
 import {Champion} from "../model/models";
 import {getUrlChampionAvatar, getUrlPassive, getUrlSpell} from "../../config/config";
+import {cleanDescription} from "../../misc/utils";
 
 type ChampionProps = Readonly<{
     champion: Champion
@@ -59,11 +60,6 @@ export const ChampionView: FC<ChampionProps> = ({champion}) => {
             fontSize: 14
         }
     }))(Tooltip)
-
-    function cleanDescription(description: string) {
-        //This cleans the argument of any content in <tags>. Thanks Riot, I hate regexes.
-        return description.replace(/<[^>]*>/g, '')
-    }
 
     return (
         <React.Fragment>

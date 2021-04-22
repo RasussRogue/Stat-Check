@@ -1,6 +1,6 @@
 import {useEffect, useReducer} from "react";
 import {AxiosPromise} from "axios";
-
+import {Data} from "../components/model/models";
 interface State<P> {
     data?: P
     isError: boolean
@@ -34,11 +34,11 @@ const fetchReducer = <P>(state: State<P>, action: Action<P>): State<P> => {
                 isLoading: false
             }
         default:
-            throw new Error("Oulala")
+            throw new Error("Unknown error was encountered while fetching content.")
     }
 }
 
-export const useFetchAPI = <P>(initData: P, supplier: () => AxiosPromise<P>, dependencyList:ReadonlyArray<any>=[]) => {
+export const useFetchAPI = <P>(initData: P, supplier: () => AxiosPromise<Data>, dependencyList:ReadonlyArray<any>=[], transformer?: (data:Data) => P) => {
     const [state, dispatch] = useReducer(
         fetchReducer,
         {
@@ -52,7 +52,7 @@ export const useFetchAPI = <P>(initData: P, supplier: () => AxiosPromise<P>, dep
         dispatch({type: 'FETCH_INIT'})
         promise.then(response => {
             if (response.status >= 200 && response.status < 300) {
-                dispatch({type: 'FETCH_SUCCESS', payload: response.data})
+                dispatch({type: 'FETCH_SUCCESS', payload: transformer(response.data)})
             } else {
                 dispatch({type: 'FETCH_ERROR'})
             }
