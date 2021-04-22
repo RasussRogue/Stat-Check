@@ -11,8 +11,8 @@ import {extractChampion, extractChampionList} from "../../misc/utils";
 
 export const ChampionSelector = () => {
     const [championId, setChampionId] = useState("Aatrox")
-    const championListState = useFetchAPI<Champion[], Data>([], () => axios.get(getUrlChampionList()), [], extractChampionList)
-    const championState = useFetchAPI<Champion, Data>(undefined, () => axios.get(getUrlChampion(championId)), [championId], extractChampion)
+    const championListState = useFetchAPI<Data, Champion[]>([], () => axios.get(getUrlChampionList()), [], extractChampionList)
+    const championState = useFetchAPI<Data, Champion>(undefined, () => axios.get(getUrlChampion(championId)), [championId], extractChampion)
 
     const useStyles = makeStyles(() => ({
         avatarSearch: {
@@ -31,7 +31,7 @@ export const ChampionSelector = () => {
                 options={championListState.data as Champion[]}
                 getOptionLabel={(option) => option.id}
                 onInputChange={(event, newInputValue) => {
-                    if (newInputValue != '') {
+                    if (newInputValue !== '') {
                         setChampionId(newInputValue)
                     }
                 }}
