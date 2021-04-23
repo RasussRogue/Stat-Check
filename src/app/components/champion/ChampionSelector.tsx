@@ -8,6 +8,7 @@ import {Autocomplete} from "@material-ui/lab";
 import {Avatar, List, TextField} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {extractChampion, extractChampionList} from "../../misc/utils";
+import {Spinner} from "../commons/Spinner";
 
 export const ChampionSelector = () => {
     const [championId, setChampionId] = useState("Aatrox")
@@ -19,7 +20,8 @@ export const ChampionSelector = () => {
             height: '12%',
             width: '12%',
             marginRight: '5%'
-        }
+        },
+
     }));
 
     const classes = useStyles();
@@ -47,7 +49,7 @@ export const ChampionSelector = () => {
                     (params) => <TextField {...params} label="Champion" variant="outlined"/>
                 }
             />
-            {championState.isLoading || !championState.data ? <h1>Loading your champion...</h1> :
+            {championState.isLoading || !championState.data ? <Spinner /> :
                 <ChampionView champion={championState.data as Champion}/>}
         </List>
     )

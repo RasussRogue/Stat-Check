@@ -27,13 +27,14 @@ export interface Champion {
             full: string
         }
     }
-    spells: Passive[]
+    spells: Spell[]
 }
 
-interface Passive {
+interface Spell {
     name: string,
     description: string,
     image: {
         full: string
     }
+    cooldown:Number[]
 }

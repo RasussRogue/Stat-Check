@@ -6,6 +6,12 @@ export function cleanDescription(description: string) {
     return description.replace(/<[^>]*>/g, '')
 }
 
+export function cleanCooldown(cooldowns:Number[]) {
+    //This displays the cooldowns of an ability and replaces all the , with /
+    //Example : changes "4,5,8,3" to "4/5/8/3"
+    return cooldowns.toString().replace(/[ ]*,[ ]*|[ ]+/g, '/')
+}
+
 export function extractChampionList(data: Data) {
     return Object.values(data.data) as Champion[]
 }
