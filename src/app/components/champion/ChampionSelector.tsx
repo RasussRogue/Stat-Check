@@ -5,9 +5,10 @@ import {ChampionView} from "./ChampionView";
 import {getUrlChampion, getUrlChampionAvatar, getUrlChampionList} from "../../config/config";
 import {useFetchAPI} from "../../api/reducer";
 import {Autocomplete} from "@material-ui/lab";
-import {Avatar, CircularProgress, List, TextField} from "@material-ui/core";
+import {Avatar, List, TextField} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {extractChampion, extractChampionList} from "../../misc/utils";
+import {Spinner} from "../commons/Spinner";
 
 export const ChampionSelector = () => {
     const [championId, setChampionId] = useState("Aatrox")
@@ -20,11 +21,7 @@ export const ChampionSelector = () => {
             width: '12%',
             marginRight: '5%'
         },
-        loaderBox: {
-            width: '100%',
-            textAlign: 'center',
-            marginTop: '30%'
-        }
+
     }));
 
     const classes = useStyles();
@@ -52,10 +49,7 @@ export const ChampionSelector = () => {
                     (params) => <TextField {...params} label="Champion" variant="outlined"/>
                 }
             />
-            {championState.isLoading || !championState.data ?
-                <div className={classes.loaderBox}>
-                    <CircularProgress color="secondary" size={80}/>
-                </div> :
+            {championState.isLoading || !championState.data ? <Spinner /> :
                 <ChampionView champion={championState.data as Champion}/>}
         </List>
     )
