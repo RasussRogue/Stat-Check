@@ -11,14 +11,21 @@ export interface Champion {
         full: string
     }
     stats: {
-        hp: Number,
-        mp: Number,
-        movespeed: Number,
-        armor: Number,
-        attackdamage: Number,
-        crit: Number,
-        spellblock: Number,
-        attackspeed: Number
+        hp: number,
+        hpperlevel: number,
+        mp: number,
+        mpperlevel: number,
+        movespeed: number,
+        armor: number,
+        armorperlevel: number
+        attackdamage: number,
+        attackdamageperlevel: number,
+        crit: number,
+        critperlevel: number,
+        spellblock: number,
+        spellblockperlevel: number,
+        attackspeed: number,
+        attackspeedperlevel: number
     }
     passive: {
         name: string,
@@ -36,5 +43,5 @@ interface Spell {
     image: {
         full: string
     }
-    cooldown:Number[]
+    cooldown:number[]
 }
