@@ -1,6 +1,6 @@
 # Stat Check
 
-[Lien du Trello](https://trello.com/b/uc8WwvZB/stat-check)
+[Trello Link](https://trello.com/b/uc8WwvZB/stat-check)
 
 ## Goal
 This project is a way for me to practice and perfect my React programming skills. It is a learning tool that allows me to experiment and try various things out when it comes to front-end development. 
