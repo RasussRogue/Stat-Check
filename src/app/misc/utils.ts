@@ -19,3 +19,9 @@ export function extractChampionList(data: Data) {
 export function extractChampion(data: Data) {
     return Object.values(data.data)[0] as Champion
 }
+
+export function computeStat(base:number, growth:number, level:number) {
+    //Takes the base stat, growth value and level of a champion and returns the calculated stat at this level
+    const growthComputed = growth * (0.65 + 0.035 * level)
+    return Math.round(base + growthComputed*(level-1) * (0.7025 + 0.0175 * (level-1)))
+}

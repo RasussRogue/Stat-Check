@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC} from 'react';
+import {FC, useState} from 'react';
 import {
     Avatar,
     Box,
@@ -18,13 +18,15 @@ import {mdiAxe, mdiCircleSlice8, mdiFlash, mdiPlusOutline, mdiRunFast, mdiShield
 import {Icon} from '@mdi/react'
 import {Champion} from "../model/models";
 import {getUrlChampionAvatar, getUrlPassive, getUrlSpell} from "../../config/config";
-import {cleanCooldown, cleanDescription} from "../../misc/utils";
+import {cleanCooldown, cleanDescription, computeStat} from "../../misc/utils";
 
 type ChampionProps = Readonly<{
     champion: Champion
 }>
 
 export const ChampionView: FC<ChampionProps> = ({champion}) => {
+    const [championLevel, setChampionLevel] = useState(1)
+
     document.title = "Champions"
     const useStyles = makeStyles((theme: Theme) => ({
         icon: {
@@ -140,6 +142,7 @@ export const ChampionView: FC<ChampionProps> = ({champion}) => {
                         min={1}
                         max={18}
                         color={"secondary"}
+                        onChangeCommitted={(object, value) => setChampionLevel(value as number)}
                     />
                 </ListItem>
             </Box>
@@ -148,28 +151,28 @@ export const ChampionView: FC<ChampionProps> = ({champion}) => {
                 <ListItem key='Stats'>
                     <Grid container spacing={2}>
                         <Grid item xs={4}>
-                            <Icon className={classes.icon} path={mdiPlusOutline}/>{champion.stats.hp}
+                            <Icon className={classes.icon} path={mdiPlusOutline}/>{computeStat(champion.stats.hp, champion.stats.hpperlevel, championLevel)}
                         </Grid>
                         <Grid item xs={4}>
-                            <Icon className={classes.icon} path={mdiWater}/>{champion.stats.mp}
+                            <Icon className={classes.icon} path={mdiWater}/>{computeStat(champion.stats.mp, champion.stats.mpperlevel, championLevel)}
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Icon className={classes.icon} path={mdiAxe}/>{computeStat(champion.stats.attackspeed, champion.stats.attackspeedperlevel, championLevel)}
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Icon className={classes.icon} path={mdiShield}/>{computeStat(champion.stats.armor, champion.stats.armorperlevel, championLevel)}
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Icon className={classes.icon} path={mdiSword}/>{computeStat(champion.stats.attackdamage, champion.stats.attackdamageperlevel, championLevel)}
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Icon className={classes.icon} path={mdiFlash}/>{computeStat(champion.stats.crit, champion.stats.critperlevel, championLevel)}
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Icon className={classes.icon} path={mdiCircleSlice8}/>{computeStat(champion.stats.spellblock, champion.stats.spellblockperlevel, championLevel)}
                         </Grid>
                         <Grid item xs={4}>
                             <Icon className={classes.icon} path={mdiRunFast}/>{champion.stats.movespeed}
-                        </Grid>
-                        <Grid item xs={4}>
-                            <Icon className={classes.icon} path={mdiShield}/>{champion.stats.armor}
-                        </Grid>
-                        <Grid item xs={4}>
-                            <Icon className={classes.icon} path={mdiSword}/>{champion.stats.attackdamage}
-                        </Grid>
-                        <Grid item xs={4}>
-                            <Icon className={classes.icon} path={mdiFlash}/>{champion.stats.crit}
-                        </Grid>
-                        <Grid item xs={4}>
-                            <Icon className={classes.icon} path={mdiCircleSlice8}/>{champion.stats.spellblock}
-                        </Grid>
-                        <Grid item xs={4}>
-                            <Icon className={classes.icon} path={mdiAxe}/>{champion.stats.attackspeed}
                         </Grid>
                     </Grid>
                 </ListItem>
