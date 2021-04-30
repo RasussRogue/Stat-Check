@@ -25,3 +25,13 @@ export function computeStat(base:number, growth:number, level:number) {
     const growthComputed = growth * (0.65 + 0.035 * level)
     return Math.round(base + growthComputed*(level-1) * (0.7025 + 0.0175 * (level-1)))
 }
+
+export function getChampionByName(champions:Champion[], name:string) {
+    let championRet
+    champions.forEach(element => {
+        if (element.name == name) {
+            championRet = element
+        }
+    })
+    return championRet
+}

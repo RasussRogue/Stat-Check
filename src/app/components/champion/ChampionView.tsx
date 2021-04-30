@@ -4,10 +4,8 @@ import {
     Avatar,
     Box,
     Fade,
-    Grid,
+    Grid, List,
     ListItem,
-    ListItemAvatar,
-    ListItemText,
     Slider,
     Theme,
     Tooltip,
@@ -17,8 +15,9 @@ import {makeStyles} from '@material-ui/core/styles';
 import {mdiAxe, mdiCircleSlice8, mdiFlash, mdiPlusOutline, mdiRunFast, mdiShield, mdiSword, mdiWater} from '@mdi/js';
 import {Icon} from '@mdi/react'
 import {Champion} from "../model/models";
-import {getUrlChampionAvatar, getUrlPassive, getUrlSpell} from "../../config/config";
+import {getUrlPassive, getUrlSpell} from "../../config/config";
 import {cleanCooldown, cleanDescription, computeStat} from "../../misc/utils";
+import {IDCard} from "../commons/IDCard";
 
 type ChampionProps = Readonly<{
     champion: Champion
@@ -64,22 +63,8 @@ export const ChampionView: FC<ChampionProps> = ({champion}) => {
     }))(Tooltip)
 
     return (
-        <React.Fragment>
-            <ListItem key='IDCard'>
-                <ListItemAvatar>
-                    <Avatar className={classes.avatarDisplay} alt={champion.name} variant='square'
-                            src={getUrlChampionAvatar(champion.image.full)}/>
-                </ListItemAvatar>
-                <ListItemText
-                    classes={{
-                        primary: classes.itemTextSizePrimary,
-                        secondary: classes.itemTextSizeSecondary
-                    }}
-                    primary={champion.name}
-                    secondary={champion.title}
-                />
-            </ListItem>
-
+        <List>
+            <IDCard champion={champion}/>
             <ListItem key='Abilities'>
                 <AbilityTooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} arrow title={
                     <React.Fragment>
@@ -177,6 +162,6 @@ export const ChampionView: FC<ChampionProps> = ({champion}) => {
                     </Grid>
                 </ListItem>
             </Box>
-        </React.Fragment>
+        </List>
     )
 }

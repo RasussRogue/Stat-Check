@@ -22,4 +22,5 @@ export const theme = createMuiTheme({
             main: '#3273FA',
         },
     },
+
 });

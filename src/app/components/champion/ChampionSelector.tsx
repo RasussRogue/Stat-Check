@@ -5,15 +5,19 @@ import {ChampionView} from "./ChampionView";
 import {getUrlChampion, getUrlChampionAvatar, getUrlChampionList} from "../../config/config";
 import {useFetchAPI} from "../../api/reducer";
 import {Autocomplete} from "@material-ui/lab";
-import {Avatar, List, TextField} from "@material-ui/core";
+import {Avatar, Grid, TextField} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import {extractChampion, extractChampionList} from "../../misc/utils";
+import {extractChampion, extractChampionList, getChampionByName} from "../../misc/utils";
 import {Spinner} from "../commons/Spinner";
+import {OpponentView} from "../opponent/OpponentView";
 
 export const ChampionSelector = () => {
     const [championId, setChampionId] = useState("Aatrox")
+    const [opponents, setOpponentId] = useState(["Fiora", "Riven", "Camille", "Teemo", "Nasus"])
+
     const championListState = useFetchAPI<Data, Champion[]>([], () => axios.get(getUrlChampionList()), [], extractChampionList)
     const championState = useFetchAPI<Data, Champion>(undefined, () => axios.get(getUrlChampion(championId)), [championId], extractChampion)
+
 
     const useStyles = makeStyles(() => ({
         avatarSearch: {
@@ -27,30 +31,36 @@ export const ChampionSelector = () => {
     const classes = useStyles();
 
     return (
-        <List>
-            <Autocomplete
-                id="champion-box-complete"
-                options={championListState.data as Champion[]}
-                getOptionLabel={(option) => option.id}
-                onInputChange={(event, newInputValue) => {
-                    if (newInputValue !== '') {
-                        setChampionId(newInputValue)
+        <React.Fragment>
+            <Grid item md={4}>
+                <Autocomplete
+                    id="champion-box-complete"
+                    options={championListState.data as Champion[]}
+                    getOptionLabel={(option) => option.id}
+                    onInputChange={(event, newInputValue) => {
+                        if (newInputValue !== '') {
+                            setChampionId(newInputValue)
+                        }
+                    }}
+                    renderOption={(option) => (
+                        <React.Fragment>
+                            <Avatar id={option.id} className={classes.avatarSearch} variant='square'
+                                    src={getUrlChampionAvatar(option.image.full)}/>
+                            {option.name}
+                        </React.Fragment>
+                    )}
+                    getOptionSelected={(option, value) => value.name === option.name}
+                    renderInput={
+                        (params) => <TextField {...params} label="Champion" variant="outlined" />
                     }
-                }}
-                renderOption={(option) => (
-                    <React.Fragment>
-                        <Avatar id={option.id} className={classes.avatarSearch} variant='square'
-                                src={getUrlChampionAvatar(option.image.full)}/>
-                        {option.name}
-                    </React.Fragment>
-                )}
-                getOptionSelected={(option, value) => value.name === option.name}
-                renderInput={
-                    (params) => <TextField {...params} label="Champion" variant="outlined"/>
-                }
-            />
-            {championState.isLoading || !championState.data ? <Spinner /> :
-                <ChampionView champion={championState.data as Champion}/>}
-        </List>
+                />
+                {championState.isLoading || !championState.data ? <Spinner/> :
+                    <ChampionView champion={championState.data as Champion}/>}
+            </Grid>
+            <Grid item md={4}>
+                {championListState.isLoading || (championListState.data as Champion[]).length <= 0 ? <Spinner/> :
+                    opponents.map((championName) => <OpponentView opponent={getChampionByName(championListState.data as Champion[], championName)} />)}
+            </Grid>
+        </React.Fragment>
     )
 }
