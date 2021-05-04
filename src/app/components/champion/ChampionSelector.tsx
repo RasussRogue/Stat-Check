@@ -36,10 +36,10 @@ export const ChampionSelector = () => {
                 <Autocomplete
                     id="champion-box-complete"
                     options={championListState.data as Champion[]}
-                    getOptionLabel={(option) => option.id}
-                    onInputChange={(event, newInputValue) => {
-                        if (newInputValue !== '') {
-                            setChampionId(newInputValue)
+                    getOptionLabel={(option) => option.name}
+                    onChange={(event, newValue) => {
+                        if (newValue) {
+                            setChampionId((newValue as Champion).id as string)
                         }
                     }}
                     renderOption={(option) => (

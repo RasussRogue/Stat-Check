@@ -27,11 +27,7 @@ export function computeStat(base:number, growth:number, level:number) {
 }
 
 export function getChampionByName(champions:Champion[], name:string) {
-    let championRet
-    champions.forEach(element => {
-        if (element.name == name) {
-            championRet = element
-        }
-    })
-    return championRet
+    //Takes a champion's name and a list of champions and returns the champion with the same "name" value from the list.
+    const result = champions.filter((element) => element.name === name)
+    return result[0]
 }

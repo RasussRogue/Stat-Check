@@ -68,7 +68,7 @@ export const ChampionView: FC<ChampionProps> = ({champion}) => {
             <ListItem key='Abilities'>
                 <AbilityTooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} arrow title={
                     <React.Fragment>
-                        <h2 color="inherit">{champion.passive.name}</h2>
+                        <h2 color="inherit">Passive - {champion.passive.name}</h2>
                         {cleanDescription(champion.passive.description)}
                     </React.Fragment>}>
                     <Avatar className={classes.abilityIcon} alt={champion.name} variant='square'
@@ -77,7 +77,7 @@ export const ChampionView: FC<ChampionProps> = ({champion}) => {
 
                 <AbilityTooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} arrow title={
                     <React.Fragment>
-                        <h2 color="inherit">{champion.spells[0].name}</h2>
+                        <h2 color="inherit">Q - {champion.spells[0].name}</h2>
                         <h3>{'Cooldown : ' + cleanCooldown(champion.spells[0].cooldown)}</h3>
                         {cleanDescription(champion.spells[0].description)}
                     </React.Fragment>}>
@@ -87,7 +87,7 @@ export const ChampionView: FC<ChampionProps> = ({champion}) => {
 
                 <AbilityTooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} arrow title={
                     <React.Fragment>
-                        <h2 color="inherit">{champion.spells[1].name}</h2>
+                        <h2 color="inherit">W - {champion.spells[1].name}</h2>
                         <h3>{'Cooldown : ' + cleanCooldown(champion.spells[1].cooldown)}</h3>
                         {cleanDescription(champion.spells[1].description)}
                     </React.Fragment>}>
@@ -97,7 +97,7 @@ export const ChampionView: FC<ChampionProps> = ({champion}) => {
 
                 <AbilityTooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} arrow title={
                     <React.Fragment>
-                        <h2 color="inherit">{champion.spells[2].name}</h2>
+                        <h2 color="inherit">E - {champion.spells[2].name}</h2>
                         <h3>{'Cooldown : ' + cleanCooldown(champion.spells[2].cooldown)}</h3>
                         {cleanDescription(champion.spells[2].description)}
                     </React.Fragment>}>
@@ -107,7 +107,7 @@ export const ChampionView: FC<ChampionProps> = ({champion}) => {
 
                 <AbilityTooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} arrow title={
                     <React.Fragment>
-                        <h2 color="inherit">{champion.spells[3].name}</h2>
+                        <h2 color="inherit">R - {champion.spells[3].name}</h2>
                         <h3>{'Cooldown : ' + cleanCooldown(champion.spells[3].cooldown)}</h3>
                         {cleanDescription(champion.spells[3].description)}
                     </React.Fragment>}>
