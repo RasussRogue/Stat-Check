@@ -11,7 +11,7 @@ export const theme = createMuiTheme({
 
     palette: {
         type: 'dark',
-        common:  {
+        common: {
             black: '#434449',
             white: '#EAEBF0'
         },
@@ -22,5 +22,4 @@ export const theme = createMuiTheme({
             main: '#3273FA',
         },
     },
-
 });

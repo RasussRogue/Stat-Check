@@ -18,7 +18,6 @@ export const ChampionSelector = () => {
     const championListState = useFetchAPI<Data, Champion[]>([], () => axios.get(getUrlChampionList()), [], extractChampionList)
     const championState = useFetchAPI<Data, Champion>(undefined, () => axios.get(getUrlChampion(championId)), [championId], extractChampion)
 
-
     const useStyles = makeStyles(() => ({
         avatarSearch: {
             height: '12%',
@@ -51,7 +50,7 @@ export const ChampionSelector = () => {
                     )}
                     getOptionSelected={(option, value) => value.name === option.name}
                     renderInput={
-                        (params) => <TextField {...params} label="Champion" variant="outlined" />
+                        (params) => <TextField {...params} label="Champion" variant="outlined"/>
                     }
                 />
                 {championState.isLoading || !championState.data ? <Spinner/> :
@@ -59,7 +58,8 @@ export const ChampionSelector = () => {
             </Grid>
             <Grid item md={4}>
                 {championListState.isLoading || (championListState.data as Champion[]).length <= 0 ? <Spinner/> :
-                    opponents.map((championName) => <OpponentView opponent={getChampionByName(championListState.data as Champion[], championName)} />)}
+                    opponents.map((championName) => <OpponentView
+                        opponent={getChampionByName(championListState.data as Champion[], championName)}/>)}
             </Grid>
         </React.Fragment>
     )

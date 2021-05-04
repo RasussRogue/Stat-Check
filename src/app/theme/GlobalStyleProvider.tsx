@@ -14,7 +14,7 @@ const useStyles = makeStyles<Theme>((theme) => ({
             background: '#070720',
             overflowX: 'hidden'
         },
-        h2:  {
+        h2: {
             fontSize: '1.25em'
         },
         h3: {

@@ -1,9 +1,9 @@
+import * as React from "react";
 import {FC} from "react";
 import {Champion} from "../model/models";
 import {makeStyles} from "@material-ui/core/styles";
 import {Avatar, ListItem, ListItemAvatar, ListItemText} from "@material-ui/core";
 import {getUrlChampionAvatar} from "../../config/config";
-import * as React from "react";
 
 type IDCardProps = Readonly<{
     champion: Champion
