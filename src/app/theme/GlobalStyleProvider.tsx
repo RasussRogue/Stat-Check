@@ -11,9 +11,10 @@ const useStyles = makeStyles<Theme>((theme) => ({
             fontFamily: 'Rubik',
             color: theme.palette.common.white,
             height: '100%',
-            background: '#070720'
+            background: '#070720',
+            overflowX: 'hidden'
         },
-        h2:  {
+        h2: {
             fontSize: '1.25em'
         },
         h3: {
