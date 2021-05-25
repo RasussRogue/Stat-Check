@@ -7,9 +7,11 @@ import {CssBaseline} from "@material-ui/core";
 import {theme} from "./theme/Theme"
 import {GlobalStyleProvider} from "./theme/GlobalStyleProvider";
 import Grid from '@material-ui/core/Grid';
+import {setupFirestore} from "./config/firebase";
 
 export const App = () => {
     document.title = "Stat Check"
+    setupFirestore()
     return (
         <ThemeProvider theme={theme}>
             <GlobalStyleProvider>

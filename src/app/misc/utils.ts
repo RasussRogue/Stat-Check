@@ -1,4 +1,5 @@
-import {Champion, Data} from "../components/model/models";
+import {Champion, Data, Matchup} from "../components/model/models";
+import {theme} from "../theme/Theme";
 
 export function cleanDescription(description: string) {
     //This cleans the argument of any content in <tags>. Thanks Riot, I hate regexes.
@@ -30,4 +31,44 @@ export function getChampionByName(champions: Champion[], name: string) {
     //Takes a champion's name and a list of champions and returns the champion with the same "name" value from the list.
     const result = champions.filter((element) => element.name === name)
     return result[0]
+}
+function getIndexOfHighestDifficulty(matchup: Matchup) {
+    return matchup.votes.indexOf(Math.max(...matchup.votes))
+}
+export function sortMatchups(matchups: Matchup[]) {
+    return matchups.sort((a, b) => getIndexOfHighestDifficulty(a) - getIndexOfHighestDifficulty(b) )
+}
+
+export function getDifficultyButtonColor(matchup: Matchup) {
+    switch(getIndexOfHighestDifficulty(matchup)) {
+        case 0 :
+            return theme.palette.error.main
+        case 1 :
+            return theme.palette.warning.main
+        case 2 :
+            return "yellow"
+        case 3 :
+            return theme.palette.success.main
+        case 4 :
+            return theme.palette.info.main
+        default :
+            return theme.palette.secondary.main
+    }
+}
+
+export function getDifficultyButtonText(matchup: Matchup) {
+    switch(getIndexOfHighestDifficulty(matchup)) {
+        case 0 :
+            return "Extreme"
+        case 1 :
+            return "Hard"
+        case 2 :
+            return "Even"
+        case 3 :
+            return "Easy"
+        case 4 :
+            return "Free"
+        default :
+            return "Unknown"
+    }
 }

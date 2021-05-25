@@ -45,3 +45,10 @@ interface Spell {
     }
     cooldown:number[]
 }
+
+export interface Matchup {
+    champion: string,
+    opponent: string,
+    tips: string[]
+    votes : number[]
+}
