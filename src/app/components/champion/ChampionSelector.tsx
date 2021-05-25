@@ -1,22 +1,32 @@
 import React, {useState} from "react";
 import axios from 'axios';
-import {Champion, Data} from "../model/models";
+import {Champion, Data, Matchup} from "../model/models";
 import {ChampionView} from "./ChampionView";
 import {getUrlChampion, getUrlChampionAvatar, getUrlChampionList} from "../../config/config";
-import {useFetchAPI} from "../../api/reducer";
+import {useFetchAPI, useFetchFirebase} from "../../api/reducer";
 import {Autocomplete} from "@material-ui/lab";
 import {Avatar, Grid, TextField} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {extractChampion, extractChampionList, getChampionByName} from "../../misc/utils";
 import {Spinner} from "../commons/Spinner";
+import 'firebase/firestore';
+import {dataToOpponents, setupFirestore} from "../../config/firebase";
+import firebase from "firebase";
 import {OpponentView} from "../opponent/OpponentView";
+import DocumentData = firebase.firestore.DocumentData;
+import QuerySnapshot = firebase.firestore.QuerySnapshot;
 
 export const ChampionSelector = () => {
     const [championId, setChampionId] = useState("Aatrox")
-    const [opponents, setOpponentId] = useState(["Fiora", "Riven", "Camille", "Teemo", "Nasus"])
-
+    const opponentListState = useFetchFirebase<QuerySnapshot<DocumentData>, Matchup[]>(
+        [],
+        () => db.collection("matchups").where("champion", "==", championId).get(),
+        [championId],
+        dataToOpponents)
     const championListState = useFetchAPI<Data, Champion[]>([], () => axios.get(getUrlChampionList()), [], extractChampionList)
     const championState = useFetchAPI<Data, Champion>(undefined, () => axios.get(getUrlChampion(championId)), [championId], extractChampion)
+
+    const db = setupFirestore()
 
     const useStyles = makeStyles(() => ({
         avatarSearch: {
@@ -57,9 +67,11 @@ export const ChampionSelector = () => {
                     <ChampionView champion={championState.data as Champion}/>}
             </Grid>
             <Grid item md={4}>
-                {championListState.isLoading || (championListState.data as Champion[]).length <= 0 ? <Spinner/> :
-                    opponents.map((championName) => <OpponentView
-                        opponent={getChampionByName(championListState.data as Champion[], championName)}/>)}
+                {championListState.isLoading || (championListState.data as Champion[]).length <= 0  || opponentListState.isLoading ?
+                    <Spinner/> :
+                    (opponentListState.data as Matchup[]).map((opponent) => <OpponentView
+                        opponent={getChampionByName(championListState.data as Champion[], opponent.opponent)} matchup = {opponent}/>)}
+
             </Grid>
         </React.Fragment>
     )

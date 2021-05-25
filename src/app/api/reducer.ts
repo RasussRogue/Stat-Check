@@ -38,6 +38,29 @@ const fetchReducer = <P>(state: State<P>, action: Action<P>): State<P> => {
     }
 }
 
+export const useFetchFirebase = <P, T=P>(initData: T, supplier: () => Promise<P>, dependencyList:ReadonlyArray<any>=[], transformer?: (data:P) => T) => {
+    const [state, dispatch] = useReducer(
+        fetchReducer,
+        {
+            data: initData,
+            isError: false,
+            isLoading: false
+        }
+    )
+
+    useEffect(() => {
+        const promise = supplier()
+        dispatch({type: 'FETCH_INIT'})
+        promise.then(response => {
+                dispatch({type: 'FETCH_SUCCESS', payload: transformer(response)})
+        }).catch(error => {
+            dispatch({type: 'FETCH_ERROR'})
+            console.log(error)
+        })
+    }, dependencyList)
+    return state
+}
+
 export const useFetchAPI = <P, T=P>(initData: T, supplier: () => AxiosPromise<P>, dependencyList:ReadonlyArray<any>=[], transformer?: (data:P) => T) => {
     const [state, dispatch] = useReducer(
         fetchReducer,
