@@ -7,7 +7,7 @@ This project is a way for me to practice and perfect my React programming skills
 
 It also allows me to discover new technologies and learn to master them, all based around a theme that personnaly interests me : video games, and particularly League of Legends. 
 
-Lastly, I will use this opportunity to improve my overlall organization, my planning skills and my time management skills while practicing the Agile method.
+Lastly, I will use this opportunity to improve my overall organization, my planning skills and my time management skills while practicing the Agile method.
 
 ## Tools used
 
