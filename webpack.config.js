@@ -8,7 +8,7 @@ module.exports = {
 
 
     devServer: {
-        contentBase: path.join(__dirname, ''),
+        static: path.join(__dirname, ''),
         compress: true,
         port: 3000,
         historyApiFallback: true,
